@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
@@ -45,15 +45,35 @@
       margin: 0 auto 12px;
     }
 
-    .search input {
-      width: 100%;
+    .search-box {
+      display: flex;
+      gap: 8px;
       max-width: 700px;
-      display: block;
       margin: auto;
+    }
+
+    .search-box input {
+      flex: 1;
+      min-width: 0;
       padding: 14px;
       border: 1px solid #d1d5db;
       border-radius: 8px;
       font-size: 16px;
+    }
+
+    .search-box button {
+      padding: 14px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #111827;
+      color: white;
+      cursor: pointer;
+      font-size: 15px;
+      white-space: nowrap;
+    }
+
+    .search-box button:hover {
+      background: #374151;
     }
 
     main {
@@ -191,6 +211,14 @@
       .products {
         grid-template-columns: 1fr;
       }
+
+      .search-box {
+        flex-direction: column;
+      }
+
+      .search-box button {
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -203,30 +231,47 @@
   </header>
 
   <section class="search">
+
     <h2>O que estás à procura?</h2>
 
-    <input
-      type="text"
-      id="searchInput"
-      placeholder="Pesquisar produtos..."
-      onkeyup="searchProducts()"
-    >
+    <div class="search-box">
+
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Pesquisar produtos..."
+      >
+
+      <button onclick="searchProducts()">
+        🔍 Pesquisar
+      </button>
+
+    </div>
+
   </section>
 
   <main>
 
     <section>
+
       <h2>Categorias</h2>
 
       <div class="categories">
+
         <button>📱 Eletrônicos</button>
+
         <button>👕 Moda</button>
+
         <button>🏠 Casa</button>
+
         <button>🍎 Alimentos</button>
+
       </div>
+
     </section>
 
     <section>
+
       <h2>Produtos em destaque</h2>
 
       <div class="products" id="products">
@@ -256,6 +301,7 @@
 
         </article>
 
+
         <article class="product">
 
           <div class="product-image">
@@ -281,6 +327,7 @@
 
         </article>
 
+
         <article class="product">
 
           <div class="product-image">
@@ -305,6 +352,7 @@
           </button>
 
         </article>
+
 
         <article class="product">
 
@@ -332,14 +380,20 @@
         </article>
 
       </div>
+
     </section>
+
 
     <section id="cart">
 
       <h2>🛒 Carrinho</h2>
 
       <div id="cartItems">
-        <p>O carrinho está vazio.</p>
+
+        <p>
+          O carrinho está vazio.
+        </p>
+
       </div>
 
       <h3 id="total">
@@ -350,9 +404,12 @@
 
   </main>
 
+
   <footer>
 
-    <p>© 2026 Kuanzashop</p>
+    <p>
+      © 2026 Kuanzashop
+    </p>
 
     <p>
       Compra fácil, vende fácil.
@@ -360,10 +417,13 @@
 
   </footer>
 
+
   <script>
 
     let cart = [];
+
     let total = 0;
+
 
     function addToCart(name, price) {
 
@@ -376,8 +436,12 @@
 
       updateCart();
 
-      alert(name + " foi adicionado ao carrinho!");
+      alert(
+        name + " foi adicionado ao carrinho!"
+      );
+
     }
+
 
     function removeFromCart(index) {
 
@@ -386,7 +450,9 @@
       cart.splice(index, 1);
 
       updateCart();
+
     }
+
 
     function updateCart() {
 
@@ -395,6 +461,7 @@
 
       const totalElement =
         document.getElementById("total");
+
 
       if (cart.length === 0) {
 
@@ -405,30 +472,38 @@
 
         cartItems.innerHTML = "";
 
+
         cart.forEach(function(item, index) {
 
           const itemElement =
             document.createElement("p");
+
 
           itemElement.innerHTML =
             item.name +
             " - " +
             item.price.toLocaleString("pt-AO") +
             " Kz" +
+
             "<button class='remove-button' onclick='removeFromCart(" +
             index +
             ")'>Remover</button>";
 
+
           cartItems.appendChild(itemElement);
 
         });
+
       }
+
 
       totalElement.innerText =
         "Total: " +
         total.toLocaleString("pt-AO") +
         " Kz";
+
     }
+
 
     function searchProducts() {
 
@@ -436,15 +511,19 @@
         document
           .getElementById("searchInput")
           .value
-          .toLowerCase();
+          .toLowerCase()
+          .trim();
+
 
       const products =
         document.querySelectorAll(".product");
+
 
       products.forEach(function(product) {
 
         const text =
           product.innerText.toLowerCase();
+
 
         if (text.includes(search)) {
 
@@ -457,10 +536,10 @@
         }
 
       });
+
     }
 
   </script>
 
 </body>
-  </html>
-                                                  </html>
+            </html>
