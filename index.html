@@ -1,49 +1,159 @@
-<!DOCTYPE html>
-<html lang="pt">
+<!DOCTYPE html><html lang="pt">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kuanzashop</title>
-</head>
+  <title>Kuanzashop</title>  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-<body>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      color: #222;
+    }
 
-  <header>
+    header {
+      background: #111827;
+      color: white;
+      padding: 25px 15px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 32px;
+    }
+
+    header p {
+      margin: 8px 0 0;
+    }
+
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .search {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .search input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .categories button {
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: white;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+    }
+
+    .product {
+      background: white;
+      padding: 18px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .product h3 {
+      margin-top: 0;
+    }
+
+    .price {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .cart {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #111827;
+      color: white;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      margin-top: 30px;
+      background: #111827;
+      color: white;
+    }
+  </style></head><body>  <header>
     <h1>Kuanzashop</h1>
     <p>Compra fácil, vende fácil.</p>
-  </header>
+  </header>  <main><section class="search">
+  <h2>O que estás à procura?</h2>
+  <input type="text" placeholder="Pesquisar produtos...">
+</section>
 
-  <main>
+<section>
+  <h2>Categorias</h2>
 
-    <section>
-      <h2>O que estás à procura?</h2>
-      <input type="text" placeholder="Pesquisar produtos...">
-    </section>
+  <div class="categories">
+    <button>📱 Eletrônicos</button>
+    <button>👕 Moda</button>
+    <button>🏠 Casa</button>
+    <button>🍎 Alimentos</button>
+  </div>
+</section>
 
-    <section>
-      <h2>Categorias</h2>
-      <button>Eletrônicos</button>
-      <button>Moda</button>
-      <button>Casa</button>
-      <button>Alimentos</button>
-    </section>
+<section>
+  <h2>Produtos em destaque</h2>
 
-    <section>
-      <h2>Produtos em destaque</h2>
+  <div class="products">
 
-      <article>
-        <h3>Produto de exemplo</h3>
-        <p>Preço: 1.000 Kz</p>
-        <button>Adicionar ao carrinho</button>
-      </article>
+    <article class="product">
+      <h3>Produto de exemplo</h3>
+      <p>Produto disponível no Kuanzashop.</p>
+      <p class="price">1.000 Kz</p>
+      <button class="cart">Adicionar ao carrinho</button>
+    </article>
 
-    </section>
+    <article class="product">
+      <h3>Outro produto</h3>
+      <p>Encontre produtos de vários vendedores.</p>
+      <p class="price">2.500 Kz</p>
+      <button class="cart">Adicionar ao carrinho</button>
+    </article>
 
-  </main>
+  </div>
+</section>
 
-  <footer>
+  </main>  <footer>
     <p>© 2026 Kuanzashop</p>
-  </footer>
-
-</body>
-        </html>
+    <p>Compra fácil, vende fácil.</p>
+  </footer></body>
+                                                  </html>
