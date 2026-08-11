@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Kuanzashop</title>
 
   <style>
@@ -105,6 +106,15 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
+    .categories button:hover {
+      background: #e5e7eb;
+    }
+
+    .categories button.active {
+      background: #111827;
+      color: white;
+    }
+
     .products {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -155,6 +165,10 @@
       font-size: 15px;
     }
 
+    .cart-button:hover {
+      background: #374151;
+    }
+
     #cart {
       background: white;
       padding: 20px;
@@ -187,6 +201,11 @@
       color: #6b7280;
     }
 
+    #categoryMessage {
+      color: #6b7280;
+      margin-bottom: 15px;
+    }
+
     footer {
       text-align: center;
       padding: 25px;
@@ -195,7 +214,12 @@
       color: white;
     }
 
+    footer p {
+      margin: 5px;
+    }
+
     @media (max-width: 500px) {
+
       header h1 {
         font-size: 26px;
       }
@@ -222,6 +246,7 @@
     <p>Compra fácil, vende fácil.</p>
   </header>
 
+
   <section class="search">
 
     <h2>O que estás à procura?</h2>
@@ -244,6 +269,7 @@
 
   </section>
 
+
   <main>
 
     <section>
@@ -252,90 +278,170 @@
 
       <div class="categories">
 
-        <button type="button">📱 Eletrônicos</button>
-        <button type="button">👕 Moda</button>
-        <button type="button">🏠 Casa</button>
-        <button type="button">🍎 Alimentos</button>
+        <button
+          type="button"
+          class="category-button active"
+          data-category="todos"
+        >
+          🛍️ Todos
+        </button>
+
+        <button
+          type="button"
+          class="category-button"
+          data-category="eletronicos"
+        >
+          📱 Eletrônicos
+        </button>
+
+        <button
+          type="button"
+          class="category-button"
+          data-category="moda"
+        >
+          👕 Moda
+        </button>
+
+        <button
+          type="button"
+          class="category-button"
+          data-category="casa"
+        >
+          🏠 Casa
+        </button>
+
+        <button
+          type="button"
+          class="category-button"
+          data-category="alimentos"
+        >
+          🍎 Alimentos
+        </button>
 
       </div>
 
     </section>
 
+
     <section>
 
       <h2>Produtos em destaque</h2>
 
+      <p id="categoryMessage">
+        Todos os produtos
+      </p>
+
       <div class="products">
 
-        <article class="product">
 
-          <div class="product-image">📱</div>
+        <article
+          class="product"
+          data-category="eletronicos"
+        >
 
-          <h3>Produto de exemplo</h3>
+          <div class="product-image">
+            📱
+          </div>
 
-          <p>Produto disponível no Kuanzashop.</p>
+          <h3>Smartphone</h3>
 
-          <p class="price">1.000 Kz</p>
+          <p>
+            Smartphone disponível no Kuanzashop.
+          </p>
+
+          <p class="price">
+            1.000 Kz
+          </p>
 
           <button
             class="cart-button"
             type="button"
-            onclick="addToCart('Produto de exemplo', 1000)"
+            onclick="addToCart('Smartphone', 1000)"
           >
             Adicionar ao carrinho
           </button>
 
         </article>
 
-        <article class="product">
 
-          <div class="product-image">🎧</div>
+        <article
+          class="product"
+          data-category="eletronicos"
+        >
 
-          <h3>Outro produto</h3>
+          <div class="product-image">
+            🎧
+          </div>
 
-          <p>Encontre produtos de vários vendedores.</p>
+          <h3>Fones de ouvido</h3>
 
-          <p class="price">2.500 Kz</p>
+          <p>
+            Fones de ouvido de qualidade.
+          </p>
+
+          <p class="price">
+            2.500 Kz
+          </p>
 
           <button
             class="cart-button"
             type="button"
-            onclick="addToCart('Outro produto', 2500)"
+            onclick="addToCart('Fones de ouvido', 2500)"
           >
             Adicionar ao carrinho
           </button>
 
         </article>
 
-        <article class="product">
 
-          <div class="product-image">👕</div>
+        <article
+          class="product"
+          data-category="moda"
+        >
 
-          <h3>Roupa</h3>
+          <div class="product-image">
+            👕
+          </div>
 
-          <p>Produtos de moda para todos.</p>
+          <h3>Camiseta</h3>
 
-          <p class="price">3.000 Kz</p>
+          <p>
+            Produtos de moda para todos.
+          </p>
+
+          <p class="price">
+            3.000 Kz
+          </p>
 
           <button
             class="cart-button"
             type="button"
-            onclick="addToCart('Roupa', 3000)"
+            onclick="addToCart('Camiseta', 3000)"
           >
             Adicionar ao carrinho
           </button>
 
         </article>
 
-        <article class="product">
 
-          <div class="product-image">🏠</div>
+        <article
+          class="product"
+          data-category="casa"
+        >
+
+          <div class="product-image">
+            🏠
+          </div>
 
           <h3>Produto para casa</h3>
 
-          <p>Encontre produtos úteis para sua casa.</p>
+          <p>
+            Encontre produtos úteis para sua casa.
+          </p>
 
-          <p class="price">4.500 Kz</p>
+          <p class="price">
+            4.500 Kz
+          </p>
 
           <button
             class="cart-button"
@@ -347,35 +453,82 @@
 
         </article>
 
+
+        <article
+          class="product"
+          data-category="alimentos"
+        >
+
+          <div class="product-image">
+            🍎
+          </div>
+
+          <h3>Alimentos</h3>
+
+          <p>
+            Produtos alimentares disponíveis.
+          </p>
+
+          <p class="price">
+            2.000 Kz
+          </p>
+
+          <button
+            class="cart-button"
+            type="button"
+            onclick="addToCart('Alimentos', 2000)"
+          >
+            Adicionar ao carrinho
+          </button>
+
+        </article>
+
+
       </div>
 
     </section>
+
 
     <section id="cart">
 
       <h2>🛒 Carrinho</h2>
 
       <div id="cartItems">
-        <p>O carrinho está vazio.</p>
+
+        <p>
+          O carrinho está vazio.
+        </p>
+
       </div>
 
-      <h3 id="total">Total: 0 Kz</h3>
+      <h3 id="total">
+        Total: 0 Kz
+      </h3>
 
     </section>
 
   </main>
 
+
   <footer>
 
-    <p>© 2026 Kuanzashop</p>
-    <p>Compra fácil, vende fácil.</p>
+    <p>
+      © 2026 Kuanzashop
+    </p>
+
+    <p>
+      Compra fácil, vende fácil.
+    </p>
 
   </footer>
+
 
   <script>
 
     let cart = [];
+
     let total = 0;
+
 
     function addToCart(name, price) {
 
@@ -388,8 +541,13 @@
 
       updateCart();
 
-      alert(name + " foi adicionado ao carrinho!");
+      alert(
+        name +
+        " foi adicionado ao carrinho!"
+      );
+
     }
+
 
     function removeFromCart(index) {
 
@@ -398,7 +556,9 @@
       cart.splice(index, 1);
 
       updateCart();
+
     }
+
 
     function updateCart() {
 
@@ -407,6 +567,7 @@
 
       const totalElement =
         document.getElementById("total");
+
 
       if (cart.length === 0) {
 
@@ -417,55 +578,63 @@
 
         cartItems.innerHTML = "";
 
+
         cart.forEach(function(item, index) {
 
           const itemElement =
             document.createElement("p");
+
 
           itemElement.innerHTML =
             item.name +
             " - " +
             item.price.toLocaleString("pt-AO") +
             " Kz" +
+
             "<button class='remove-button' type='button' onclick='removeFromCart(" +
             index +
             ")'>Remover</button>";
 
+
           cartItems.appendChild(itemElement);
 
         });
+
       }
+
 
       totalElement.innerText =
         "Total: " +
         total.toLocaleString("pt-AO") +
         " Kz";
+
     }
+
 
     function searchProducts() {
 
-      const input =
-        document.getElementById("searchInput");
-
-      const message =
-        document.getElementById("searchMessage");
-
       const search =
-        input.value
+        document
+          .getElementById("searchInput")
+          .value
           .toLowerCase()
           .trim();
+
 
       const products =
         document.querySelectorAll(".product");
 
+
       let found = 0;
+
 
       products.forEach(function(product) {
 
         const text =
           product.innerText.toLowerCase();
 
-        if (search === "" || text.includes(search)) {
+
+        if (text.includes(search)) {
 
           product.style.display = "";
 
@@ -479,39 +648,146 @@
 
       });
 
+
       if (search === "") {
 
-        message.innerText = "";
+        document.getElementById("searchMessage").innerText = "";
 
       } else if (found === 0) {
 
-        message.innerText =
+        document.getElementById("searchMessage").innerText =
           "Nenhum produto encontrado.";
 
       } else {
 
-        message.innerText =
-          found + " produto(s) encontrado(s).";
+        document.getElementById("searchMessage").innerText =
+          found +
+          " produto(s) encontrado(s).";
+
       }
+
     }
+
+
+    function filterCategory(category) {
+
+      const products =
+        document.querySelectorAll(".product");
+
+
+      const buttons =
+        document.querySelectorAll(".category-button");
+
+
+      let found = 0;
+
+
+      products.forEach(function(product) {
+
+        const productCategory =
+          product.getAttribute("data-category");
+
+
+        if (
+          category === "todos" ||
+          productCategory === category
+        ) {
+
+          product.style.display = "";
+
+          found++;
+
+        } else {
+
+          product.style.display = "none";
+
+        }
+
+      });
+
+
+      buttons.forEach(function(button) {
+
+        button.classList.remove("active");
+
+        if (
+          button.getAttribute("data-category") === category
+        ) {
+
+          button.classList.add("active");
+
+        }
+
+      });
+
+
+      const message =
+        document.getElementById("categoryMessage");
+
+
+      if (category === "todos") {
+
+        message.innerText =
+          "Todos os produtos";
+
+      } else {
+
+        message.innerText =
+          found +
+          " produto(s) nesta categoria.";
+
+      }
+
+
+      document.getElementById("searchInput").value = "";
+
+      document.getElementById("searchMessage").innerText = "";
+
+    }
+
 
     document
       .getElementById("searchButton")
-      .addEventListener("click", searchProducts);
+      .addEventListener(
+        "click",
+        searchProducts
+      );
+
 
     document
       .getElementById("searchInput")
-      .addEventListener("keydown", function(event) {
+      .addEventListener(
+        "keydown",
+        function(event) {
 
-        if (event.key === "Enter") {
+          if (event.key === "Enter") {
 
-          searchProducts();
+            searchProducts();
+
+          }
 
         }
+      );
+
+
+    document
+      .querySelectorAll(".category-button")
+      .forEach(function(button) {
+
+        button.addEventListener(
+          "click",
+          function() {
+
+            filterCategory(
+              button.getAttribute("data-category")
+            );
+
+          }
+        );
 
       });
 
   </script>
 
 </body>
-          </html>
+  </html>
