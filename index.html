@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Kuanzashop</title>
 
   <style>
@@ -69,7 +68,6 @@
       color: white;
       cursor: pointer;
       font-size: 15px;
-      white-space: nowrap;
     }
 
     .search-box button:hover {
@@ -105,10 +103,6 @@
       font-size: 15px;
       cursor: pointer;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    }
-
-    .categories button:hover {
-      background: #e5e7eb;
     }
 
     .products {
@@ -161,10 +155,6 @@
       font-size: 15px;
     }
 
-    .cart-button:hover {
-      background: #374151;
-    }
-
     #cart {
       background: white;
       padding: 20px;
@@ -191,16 +181,18 @@
       margin-top: 15px;
     }
 
+    #searchMessage {
+      max-width: 700px;
+      margin: 12px auto 0;
+      color: #6b7280;
+    }
+
     footer {
       text-align: center;
       padding: 25px;
       margin-top: 30px;
       background: #111827;
       color: white;
-    }
-
-    footer p {
-      margin: 5px;
     }
 
     @media (max-width: 500px) {
@@ -242,11 +234,13 @@
         placeholder="Pesquisar produtos..."
       >
 
-      <button onclick="searchProducts()">
+      <button id="searchButton" type="button">
         🔍 Pesquisar
       </button>
 
     </div>
+
+    <p id="searchMessage"></p>
 
   </section>
 
@@ -258,13 +252,10 @@
 
       <div class="categories">
 
-        <button>📱 Eletrônicos</button>
-
-        <button>👕 Moda</button>
-
-        <button>🏠 Casa</button>
-
-        <button>🍎 Alimentos</button>
+        <button type="button">📱 Eletrônicos</button>
+        <button type="button">👕 Moda</button>
+        <button type="button">🏠 Casa</button>
+        <button type="button">🍎 Alimentos</button>
 
       </div>
 
@@ -274,26 +265,21 @@
 
       <h2>Produtos em destaque</h2>
 
-      <div class="products" id="products">
+      <div class="products">
 
         <article class="product">
 
-          <div class="product-image">
-            📱
-          </div>
+          <div class="product-image">📱</div>
 
           <h3>Produto de exemplo</h3>
 
-          <p>
-            Produto disponível no Kuanzashop.
-          </p>
+          <p>Produto disponível no Kuanzashop.</p>
 
-          <p class="price">
-            1.000 Kz
-          </p>
+          <p class="price">1.000 Kz</p>
 
           <button
             class="cart-button"
+            type="button"
             onclick="addToCart('Produto de exemplo', 1000)"
           >
             Adicionar ao carrinho
@@ -301,25 +287,19 @@
 
         </article>
 
-
         <article class="product">
 
-          <div class="product-image">
-            🎧
-          </div>
+          <div class="product-image">🎧</div>
 
           <h3>Outro produto</h3>
 
-          <p>
-            Encontre produtos de vários vendedores.
-          </p>
+          <p>Encontre produtos de vários vendedores.</p>
 
-          <p class="price">
-            2.500 Kz
-          </p>
+          <p class="price">2.500 Kz</p>
 
           <button
             class="cart-button"
+            type="button"
             onclick="addToCart('Outro produto', 2500)"
           >
             Adicionar ao carrinho
@@ -327,25 +307,19 @@
 
         </article>
 
-
         <article class="product">
 
-          <div class="product-image">
-            👕
-          </div>
+          <div class="product-image">👕</div>
 
           <h3>Roupa</h3>
 
-          <p>
-            Produtos de moda para todos.
-          </p>
+          <p>Produtos de moda para todos.</p>
 
-          <p class="price">
-            3.000 Kz
-          </p>
+          <p class="price">3.000 Kz</p>
 
           <button
             class="cart-button"
+            type="button"
             onclick="addToCart('Roupa', 3000)"
           >
             Adicionar ao carrinho
@@ -353,25 +327,19 @@
 
         </article>
 
-
         <article class="product">
 
-          <div class="product-image">
-            🏠
-          </div>
+          <div class="product-image">🏠</div>
 
           <h3>Produto para casa</h3>
 
-          <p>
-            Encontre produtos úteis para sua casa.
-          </p>
+          <p>Encontre produtos úteis para sua casa.</p>
 
-          <p class="price">
-            4.500 Kz
-          </p>
+          <p class="price">4.500 Kz</p>
 
           <button
             class="cart-button"
+            type="button"
             onclick="addToCart('Produto para casa', 4500)"
           >
             Adicionar ao carrinho
@@ -383,47 +351,31 @@
 
     </section>
 
-
     <section id="cart">
 
       <h2>🛒 Carrinho</h2>
 
       <div id="cartItems">
-
-        <p>
-          O carrinho está vazio.
-        </p>
-
+        <p>O carrinho está vazio.</p>
       </div>
 
-      <h3 id="total">
-        Total: 0 Kz
-      </h3>
+      <h3 id="total">Total: 0 Kz</h3>
 
     </section>
 
   </main>
 
-
   <footer>
 
-    <p>
-      © 2026 Kuanzashop
-    </p>
-
-    <p>
-      Compra fácil, vende fácil.
-    </p>
+    <p>© 2026 Kuanzashop</p>
+    <p>Compra fácil, vende fácil.</p>
 
   </footer>
-
 
   <script>
 
     let cart = [];
-
     let total = 0;
-
 
     function addToCart(name, price) {
 
@@ -436,12 +388,8 @@
 
       updateCart();
 
-      alert(
-        name + " foi adicionado ao carrinho!"
-      );
-
+      alert(name + " foi adicionado ao carrinho!");
     }
-
 
     function removeFromCart(index) {
 
@@ -450,9 +398,7 @@
       cart.splice(index, 1);
 
       updateCart();
-
     }
-
 
     function updateCart() {
 
@@ -461,7 +407,6 @@
 
       const totalElement =
         document.getElementById("total");
-
 
       if (cart.length === 0) {
 
@@ -472,62 +417,59 @@
 
         cartItems.innerHTML = "";
 
-
         cart.forEach(function(item, index) {
 
           const itemElement =
             document.createElement("p");
-
 
           itemElement.innerHTML =
             item.name +
             " - " +
             item.price.toLocaleString("pt-AO") +
             " Kz" +
-
-            "<button class='remove-button' onclick='removeFromCart(" +
+            "<button class='remove-button' type='button' onclick='removeFromCart(" +
             index +
             ")'>Remover</button>";
-
 
           cartItems.appendChild(itemElement);
 
         });
-
       }
-
 
       totalElement.innerText =
         "Total: " +
         total.toLocaleString("pt-AO") +
         " Kz";
-
     }
-
 
     function searchProducts() {
 
+      const input =
+        document.getElementById("searchInput");
+
+      const message =
+        document.getElementById("searchMessage");
+
       const search =
-        document
-          .getElementById("searchInput")
-          .value
+        input.value
           .toLowerCase()
           .trim();
-
 
       const products =
         document.querySelectorAll(".product");
 
+      let found = 0;
 
       products.forEach(function(product) {
 
         const text =
           product.innerText.toLowerCase();
 
+        if (search === "" || text.includes(search)) {
 
-        if (text.includes(search)) {
+          product.style.display = "";
 
-          product.style.display = "block";
+          found++;
 
         } else {
 
@@ -537,9 +479,39 @@
 
       });
 
+      if (search === "") {
+
+        message.innerText = "";
+
+      } else if (found === 0) {
+
+        message.innerText =
+          "Nenhum produto encontrado.";
+
+      } else {
+
+        message.innerText =
+          found + " produto(s) encontrado(s).";
+      }
     }
+
+    document
+      .getElementById("searchButton")
+      .addEventListener("click", searchProducts);
+
+    document
+      .getElementById("searchInput")
+      .addEventListener("keydown", function(event) {
+
+        if (event.key === "Enter") {
+
+          searchProducts();
+
+        }
+
+      });
 
   </script>
 
 </body>
-            </html>
+          </html>
