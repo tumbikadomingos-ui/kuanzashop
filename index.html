@@ -1,17 +1,22 @@
-<!DOCTYPE html><html lang="pt">
+<<!DOCTYPE html>
+<html lang="pt">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kuanzashop</title>  <style>
+
+  <title>Kuanzashop</title>
+
+  <style>
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      color: #222;
+      background: #f3f4f6;
+      color: #111827;
     }
 
     header {
@@ -22,78 +27,110 @@
     }
 
     header h1 {
-      margin: 0;
       font-size: 32px;
+      margin-bottom: 8px;
     }
 
     header p {
-      margin: 8px 0 0;
-    }
-
-    main {
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
+      color: #d1d5db;
     }
 
     .search {
+      padding: 20px 15px;
       background: white;
-      padding: 20px;
-      border-radius: 12px;
-      margin-bottom: 20px;
+    }
+
+    .search h2 {
+      max-width: 700px;
+      margin: 0 auto 12px;
     }
 
     .search input {
       width: 100%;
+      max-width: 700px;
+      display: block;
+      margin: auto;
       padding: 14px;
-      border: 1px solid #ccc;
+      border: 1px solid #d1d5db;
       border-radius: 8px;
       font-size: 16px;
     }
 
+    main {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px 15px;
+    }
+
+    section {
+      margin-bottom: 35px;
+    }
+
     h2 {
-      margin-top: 0;
+      margin-bottom: 15px;
     }
 
     .categories {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-bottom: 25px;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
     }
 
     .categories button {
-      padding: 14px;
+      padding: 18px 10px;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       background: white;
-      cursor: pointer;
+      color: #111827;
       font-size: 15px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .categories button:hover {
+      background: #e5e7eb;
     }
 
     .products {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 15px;
+      gap: 20px;
     }
 
     .product {
       background: white;
-      padding: 18px;
       border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      padding: 18px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .product-image {
+      height: 150px;
+      background: #e5e7eb;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 50px;
+      margin-bottom: 15px;
     }
 
     .product h3 {
-      margin-top: 0;
+      margin-bottom: 8px;
     }
 
-    .price {
+    .product p {
+      color: #6b7280;
+      margin-bottom: 12px;
+    }
+
+    .product .price {
+      color: #111827;
+      font-size: 20px;
       font-weight: bold;
-      font-size: 18px;
     }
 
-    .cart {
+    .cart-button {
       width: 100%;
       padding: 12px;
       border: none;
@@ -104,6 +141,36 @@
       font-size: 15px;
     }
 
+    .cart-button:hover {
+      background: #374151;
+    }
+
+    #cart {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    #cartItems p {
+      margin-bottom: 10px;
+    }
+
+    .remove-button {
+      width: auto;
+      padding: 6px 10px;
+      margin-left: 8px;
+      border: none;
+      border-radius: 6px;
+      background: #dc2626;
+      color: white;
+      cursor: pointer;
+    }
+
+    #total {
+      margin-top: 15px;
+    }
+
     footer {
       text-align: center;
       padding: 25px;
@@ -111,49 +178,289 @@
       background: #111827;
       color: white;
     }
-  </style></head><body>  <header>
+
+    footer p {
+      margin: 5px;
+    }
+
+    @media (max-width: 500px) {
+      header h1 {
+        font-size: 26px;
+      }
+
+      .products {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
     <h1>Kuanzashop</h1>
     <p>Compra fácil, vende fácil.</p>
-  </header>  <main><section class="search">
-  <h2>O que estás à procura?</h2>
-  <input type="text" placeholder="Pesquisar produtos...">
-</section>
+  </header>
 
-<section>
-  <h2>Categorias</h2>
+  <section class="search">
+    <h2>O que estás à procura?</h2>
 
-  <div class="categories">
-    <button>📱 Eletrônicos</button>
-    <button>👕 Moda</button>
-    <button>🏠 Casa</button>
-    <button>🍎 Alimentos</button>
-  </div>
-</section>
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Pesquisar produtos..."
+      onkeyup="searchProducts()"
+    >
+  </section>
 
-<section>
-  <h2>Produtos em destaque</h2>
+  <main>
 
-  <div class="products">
+    <section>
+      <h2>Categorias</h2>
 
-    <article class="product">
-      <h3>Produto de exemplo</h3>
-      <p>Produto disponível no Kuanzashop.</p>
-      <p class="price">1.000 Kz</p>
-      <button class="cart">Adicionar ao carrinho</button>
-    </article>
+      <div class="categories">
+        <button>📱 Eletrônicos</button>
+        <button>👕 Moda</button>
+        <button>🏠 Casa</button>
+        <button>🍎 Alimentos</button>
+      </div>
+    </section>
 
-    <article class="product">
-      <h3>Outro produto</h3>
-      <p>Encontre produtos de vários vendedores.</p>
-      <p class="price">2.500 Kz</p>
-      <button class="cart">Adicionar ao carrinho</button>
-    </article>
+    <section>
+      <h2>Produtos em destaque</h2>
 
-  </div>
-</section>
+      <div class="products" id="products">
 
-  </main>  <footer>
+        <article class="product">
+
+          <div class="product-image">
+            📱
+          </div>
+
+          <h3>Produto de exemplo</h3>
+
+          <p>
+            Produto disponível no Kuanzashop.
+          </p>
+
+          <p class="price">
+            1.000 Kz
+          </p>
+
+          <button
+            class="cart-button"
+            onclick="addToCart('Produto de exemplo', 1000)"
+          >
+            Adicionar ao carrinho
+          </button>
+
+        </article>
+
+        <article class="product">
+
+          <div class="product-image">
+            🎧
+          </div>
+
+          <h3>Outro produto</h3>
+
+          <p>
+            Encontre produtos de vários vendedores.
+          </p>
+
+          <p class="price">
+            2.500 Kz
+          </p>
+
+          <button
+            class="cart-button"
+            onclick="addToCart('Outro produto', 2500)"
+          >
+            Adicionar ao carrinho
+          </button>
+
+        </article>
+
+        <article class="product">
+
+          <div class="product-image">
+            👕
+          </div>
+
+          <h3>Roupa</h3>
+
+          <p>
+            Produtos de moda para todos.
+          </p>
+
+          <p class="price">
+            3.000 Kz
+          </p>
+
+          <button
+            class="cart-button"
+            onclick="addToCart('Roupa', 3000)"
+          >
+            Adicionar ao carrinho
+          </button>
+
+        </article>
+
+        <article class="product">
+
+          <div class="product-image">
+            🏠
+          </div>
+
+          <h3>Produto para casa</h3>
+
+          <p>
+            Encontre produtos úteis para sua casa.
+          </p>
+
+          <p class="price">
+            4.500 Kz
+          </p>
+
+          <button
+            class="cart-button"
+            onclick="addToCart('Produto para casa', 4500)"
+          >
+            Adicionar ao carrinho
+          </button>
+
+        </article>
+
+      </div>
+    </section>
+
+    <section id="cart">
+
+      <h2>🛒 Carrinho</h2>
+
+      <div id="cartItems">
+        <p>O carrinho está vazio.</p>
+      </div>
+
+      <h3 id="total">
+        Total: 0 Kz
+      </h3>
+
+    </section>
+
+  </main>
+
+  <footer>
+
     <p>© 2026 Kuanzashop</p>
-    <p>Compra fácil, vende fácil.</p>
-  </footer></body>
+
+    <p>
+      Compra fácil, vende fácil.
+    </p>
+
+  </footer>
+
+  <script>
+
+    let cart = [];
+    let total = 0;
+
+    function addToCart(name, price) {
+
+      cart.push({
+        name: name,
+        price: price
+      });
+
+      total += price;
+
+      updateCart();
+
+      alert(name + " foi adicionado ao carrinho!");
+    }
+
+    function removeFromCart(index) {
+
+      total -= cart[index].price;
+
+      cart.splice(index, 1);
+
+      updateCart();
+    }
+
+    function updateCart() {
+
+      const cartItems =
+        document.getElementById("cartItems");
+
+      const totalElement =
+        document.getElementById("total");
+
+      if (cart.length === 0) {
+
+        cartItems.innerHTML =
+          "<p>O carrinho está vazio.</p>";
+
+      } else {
+
+        cartItems.innerHTML = "";
+
+        cart.forEach(function(item, index) {
+
+          const itemElement =
+            document.createElement("p");
+
+          itemElement.innerHTML =
+            item.name +
+            " - " +
+            item.price.toLocaleString("pt-AO") +
+            " Kz" +
+            "<button class='remove-button' onclick='removeFromCart(" +
+            index +
+            ")'>Remover</button>";
+
+          cartItems.appendChild(itemElement);
+
+        });
+      }
+
+      totalElement.innerText =
+        "Total: " +
+        total.toLocaleString("pt-AO") +
+        " Kz";
+    }
+
+    function searchProducts() {
+
+      const search =
+        document
+          .getElementById("searchInput")
+          .value
+          .toLowerCase();
+
+      const products =
+        document.querySelectorAll(".product");
+
+      products.forEach(function(product) {
+
+        const text =
+          product.innerText.toLowerCase();
+
+        if (text.includes(search)) {
+
+          product.style.display = "block";
+
+        } else {
+
+          product.style.display = "none";
+
+        }
+
+      });
+    }
+
+  </script>
+
+</body>
+  </html>
                                                   </html>
