@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="pt">
+<!DOCTYPE html><html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Kuanzashop</title>
-
-  <style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Kuanzashop</title>  <style>
     * {
       box-sizing: border-box;
       margin: 0;
@@ -193,6 +188,70 @@
 
     #total {
       margin-top: 15px;
+      margin-bottom: 15px;
+    }
+
+    #checkoutButton {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #16a34a;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    #checkoutButton:hover {
+      background: #15803d;
+    }
+
+    #checkout {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+    }
+
+    #checkout h3 {
+      margin-bottom: 15px;
+    }
+
+    .checkout-input {
+      width: 100%;
+      padding: 13px;
+      margin-bottom: 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    #orderButton {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #111827;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    #orderButton:hover {
+      background: #374151;
+    }
+
+    #checkoutMessage {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 8px;
+      display: none;
+      font-weight: bold;
     }
 
     #searchMessage {
@@ -236,294 +295,315 @@
         width: 100%;
       }
     }
-  </style>
-</head>
-
-<body>
-
-  <header>
+  </style></head><body>  <header>
     <h1>Kuanzashop</h1>
     <p>Compra fácil, vende fácil.</p>
-  </header>
+  </header>  <section class="search"><h2>O que estás à procura?</h2>
+
+<div class="search-box">
+
+  <input
+    type="text"
+    id="searchInput"
+    placeholder="Pesquisar produtos..."
+  >
+
+  <button id="searchButton" type="button">
+    🔍 Pesquisar
+  </button>
+
+</div>
+
+<p id="searchMessage"></p>
+
+  </section>  <main><section>
+
+  <h2>Categorias</h2>
+
+  <div class="categories">
+
+    <button
+      type="button"
+      class="category-button active"
+      data-category="todos"
+    >
+      🛍️ Todos
+    </button>
+
+    <button
+      type="button"
+      class="category-button"
+      data-category="eletronicos"
+    >
+      📱 Eletrônicos
+    </button>
+
+    <button
+      type="button"
+      class="category-button"
+      data-category="moda"
+    >
+      👕 Moda
+    </button>
+
+    <button
+      type="button"
+      class="category-button"
+      data-category="casa"
+    >
+      🏠 Casa
+    </button>
+
+    <button
+      type="button"
+      class="category-button"
+      data-category="alimentos"
+    >
+      🍎 Alimentos
+    </button>
+
+  </div>
+
+</section>
 
 
-  <section class="search">
+<section>
 
-    <h2>O que estás à procura?</h2>
+  <h2>Produtos em destaque</h2>
 
-    <div class="search-box">
+  <p id="categoryMessage">
+    Todos os produtos
+  </p>
 
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="Pesquisar produtos..."
-      >
+  <div class="products">
 
-      <button id="searchButton" type="button">
-        🔍 Pesquisar
-      </button>
+    <article
+      class="product"
+      data-category="eletronicos"
+    >
 
-    </div>
-
-    <p id="searchMessage"></p>
-
-  </section>
-
-
-  <main>
-
-    <section>
-
-      <h2>Categorias</h2>
-
-      <div class="categories">
-
-        <button
-          type="button"
-          class="category-button active"
-          data-category="todos"
-        >
-          🛍️ Todos
-        </button>
-
-        <button
-          type="button"
-          class="category-button"
-          data-category="eletronicos"
-        >
-          📱 Eletrônicos
-        </button>
-
-        <button
-          type="button"
-          class="category-button"
-          data-category="moda"
-        >
-          👕 Moda
-        </button>
-
-        <button
-          type="button"
-          class="category-button"
-          data-category="casa"
-        >
-          🏠 Casa
-        </button>
-
-        <button
-          type="button"
-          class="category-button"
-          data-category="alimentos"
-        >
-          🍎 Alimentos
-        </button>
-
+      <div class="product-image">
+        📱
       </div>
 
-    </section>
+      <h3>Smartphone</h3>
 
-
-    <section>
-
-      <h2>Produtos em destaque</h2>
-
-      <p id="categoryMessage">
-        Todos os produtos
+      <p>
+        Smartphone disponível no Kuanzashop.
       </p>
 
-      <div class="products">
+      <p class="price">
+        1.000 Kz
+      </p>
+
+      <button
+        class="cart-button"
+        type="button"
+        onclick="addToCart('Smartphone', 1000)"
+      >
+        Adicionar ao carrinho
+      </button>
+
+    </article>
 
 
-        <article
-          class="product"
-          data-category="eletronicos"
-        >
+    <article
+      class="product"
+      data-category="eletronicos"
+    >
 
-          <div class="product-image">
-            📱
-          </div>
-
-          <h3>Smartphone</h3>
-
-          <p>
-            Smartphone disponível no Kuanzashop.
-          </p>
-
-          <p class="price">
-            1.000 Kz
-          </p>
-
-          <button
-            class="cart-button"
-            type="button"
-            onclick="addToCart('Smartphone', 1000)"
-          >
-            Adicionar ao carrinho
-          </button>
-
-        </article>
-
-
-        <article
-          class="product"
-          data-category="eletronicos"
-        >
-
-          <div class="product-image">
-            🎧
-          </div>
-
-          <h3>Fones de ouvido</h3>
-
-          <p>
-            Fones de ouvido de qualidade.
-          </p>
-
-          <p class="price">
-            2.500 Kz
-          </p>
-
-          <button
-            class="cart-button"
-            type="button"
-            onclick="addToCart('Fones de ouvido', 2500)"
-          >
-            Adicionar ao carrinho
-          </button>
-
-        </article>
-
-
-        <article
-          class="product"
-          data-category="moda"
-        >
-
-          <div class="product-image">
-            👕
-          </div>
-
-          <h3>Camiseta</h3>
-
-          <p>
-            Produtos de moda para todos.
-          </p>
-
-          <p class="price">
-            3.000 Kz
-          </p>
-
-          <button
-            class="cart-button"
-            type="button"
-            onclick="addToCart('Camiseta', 3000)"
-          >
-            Adicionar ao carrinho
-          </button>
-
-        </article>
-
-
-        <article
-          class="product"
-          data-category="casa"
-        >
-
-          <div class="product-image">
-            🏠
-          </div>
-
-          <h3>Produto para casa</h3>
-
-          <p>
-            Encontre produtos úteis para sua casa.
-          </p>
-
-          <p class="price">
-            4.500 Kz
-          </p>
-
-          <button
-            class="cart-button"
-            type="button"
-            onclick="addToCart('Produto para casa', 4500)"
-          >
-            Adicionar ao carrinho
-          </button>
-
-        </article>
-
-
-        <article
-          class="product"
-          data-category="alimentos"
-        >
-
-          <div class="product-image">
-            🍎
-          </div>
-
-          <h3>Alimentos</h3>
-
-          <p>
-            Produtos alimentares disponíveis.
-          </p>
-
-          <p class="price">
-            2.000 Kz
-          </p>
-
-          <button
-            class="cart-button"
-            type="button"
-            onclick="addToCart('Alimentos', 2000)"
-          >
-            Adicionar ao carrinho
-          </button>
-
-        </article>
-
-
+      <div class="product-image">
+        🎧
       </div>
 
-    </section>
+      <h3>Fones de ouvido</h3>
+
+      <p>
+        Fones de ouvido de qualidade.
+      </p>
+
+      <p class="price">
+        2.500 Kz
+      </p>
+
+      <button
+        class="cart-button"
+        type="button"
+        onclick="addToCart('Fones de ouvido', 2500)"
+      >
+        Adicionar ao carrinho
+      </button>
+
+    </article>
 
 
-    <section id="cart">
+    <article
+      class="product"
+      data-category="moda"
+    >
 
-      <h2>🛒 Carrinho</h2>
-
-      <div id="cartItems">
-
-        <p>
-          O carrinho está vazio.
-        </p>
-
+      <div class="product-image">
+        👕
       </div>
 
-      <h3 id="total">
-        Total: 0 Kz
-      </h3>
+      <h3>Camiseta</h3>
 
-    </section>
+      <p>
+        Produtos de moda para todos.
+      </p>
 
-  </main>
+      <p class="price">
+        3.000 Kz
+      </p>
+
+      <button
+        class="cart-button"
+        type="button"
+        onclick="addToCart('Camiseta', 3000)"
+      >
+        Adicionar ao carrinho
+      </button>
+
+    </article>
 
 
-  <footer>
+    <article
+      class="product"
+      data-category="casa"
+    >
+
+      <div class="product-image">
+        🏠
+      </div>
+
+      <h3>Produto para casa</h3>
+
+      <p>
+        Encontre produtos úteis para sua casa.
+      </p>
+
+      <p class="price">
+        4.500 Kz
+      </p>
+
+      <button
+        class="cart-button"
+        type="button"
+        onclick="addToCart('Produto para casa', 4500)"
+      >
+        Adicionar ao carrinho
+      </button>
+
+    </article>
+
+
+    <article
+      class="product"
+      data-category="alimentos"
+    >
+
+      <div class="product-image">
+        🍎
+      </div>
+
+      <h3>Alimentos</h3>
+
+      <p>
+        Produtos alimentares disponíveis.
+      </p>
+
+      <p class="price">
+        2.000 Kz
+      </p>
+
+      <button
+        class="cart-button"
+        type="button"
+        onclick="addToCart('Alimentos', 2000)"
+      >
+        Adicionar ao carrinho
+      </button>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<section id="cart">
+
+  <h2>🛒 Carrinho</h2>
+
+  <div id="cartItems">
 
     <p>
-      © 2026 Kuanzashop
+      O carrinho está vazio.
     </p>
 
-    <p>
-      Compra fácil, vende fácil.
-    </p>
+  </div>
 
-  </footer>
+  <h3 id="total">
+    Total: 0 Kz
+  </h3>
+
+  <button
+    id="checkoutButton"
+    type="button"
+    onclick="showCheckout()"
+  >
+    🛍️ Finalizar compra
+  </button>
 
 
-  <script>
+  <div id="checkout">
+
+    <h3>📦 Dados da encomenda</h3>
+
+    <input
+      class="checkout-input"
+      type="text"
+      id="customerName"
+      placeholder="Nome completo"
+    >
+
+    <input
+      class="checkout-input"
+      type="tel"
+      id="customerPhone"
+      placeholder="Número de telefone"
+    >
+
+    <input
+      class="checkout-input"
+      type="text"
+      id="customerLocation"
+      placeholder="Localização / endereço"
+    >
+
+    <button
+      id="orderButton"
+      type="button"
+      onclick="createOrder()"
+    >
+      ✅ Confirmar encomenda
+    </button>
+
+    <div id="checkoutMessage"></div>
+
+  </div>
+
+</section>
+
+  </main>  <footer><p>
+  © 2026 Kuanzashop
+</p>
+
+<p>
+  Compra fácil, vende fácil.
+</p>
+
+  </footer>  <script>
 
     let cart = [];
 
@@ -611,6 +691,174 @@
     }
 
 
+    function showCheckout() {
+
+      if (cart.length === 0) {
+
+        alert(
+          "Adiciona pelo menos um produto ao carrinho."
+        );
+
+        return;
+
+      }
+
+      const checkout =
+        document.getElementById("checkout");
+
+      checkout.style.display = "block";
+
+      checkout.scrollIntoView({
+        behavior: "smooth"
+      });
+
+    }
+
+
+    function createOrder() {
+
+      if (cart.length === 0) {
+
+        alert(
+          "O carrinho está vazio."
+        );
+
+        return;
+
+      }
+
+
+      const name =
+        document
+          .getElementById("customerName")
+          .value
+          .trim();
+
+
+      const phone =
+        document
+          .getElementById("customerPhone")
+          .value
+          .trim();
+
+
+      const location =
+        document
+          .getElementById("customerLocation")
+          .value
+          .trim();
+
+
+      const message =
+        document.getElementById(
+          "checkoutMessage"
+        );
+
+
+      if (
+        name === "" ||
+        phone === "" ||
+        location === ""
+      ) {
+
+        message.style.display = "block";
+
+        message.style.background = "#fee2e2";
+
+        message.style.color = "#991b1b";
+
+        message.innerText =
+          "Preenche todos os campos para continuar.";
+
+        return;
+
+      }
+
+
+      const order = {
+
+        id:
+          "KZ-" +
+          Date.now(),
+
+        customer: {
+
+          name: name,
+
+          phone: phone,
+
+          location: location
+
+        },
+
+        products: cart.map(function(item) {
+
+          return {
+
+            name: item.name,
+
+            price: item.price
+
+          };
+
+        }),
+
+        total: total,
+
+        date:
+          new Date().toISOString()
+
+      };
+
+
+      let orders =
+        JSON.parse(
+          localStorage.getItem("kuanzashop_orders")
+        ) || [];
+
+
+      orders.push(order);
+
+
+      localStorage.setItem(
+        "kuanzashop_orders",
+        JSON.stringify(orders)
+      );
+
+
+      message.style.display = "block";
+
+      message.style.background = "#dcfce7";
+
+      message.style.color = "#166534";
+
+      message.innerText =
+        "✅ Encomenda criada com sucesso! Número: " +
+        order.id;
+
+
+      cart = [];
+
+      total = 0;
+
+      updateCart();
+
+
+      document.getElementById(
+        "customerName"
+      ).value = "";
+
+      document.getElementById(
+        "customerPhone"
+      ).value = "";
+
+      document.getElementById(
+        "customerLocation"
+      ).value = "";
+
+    }
+
+
     function searchProducts() {
 
       const search =
@@ -651,16 +899,22 @@
 
       if (search === "") {
 
-        document.getElementById("searchMessage").innerText = "";
+        document.getElementById(
+          "searchMessage"
+        ).innerText = "";
 
       } else if (found === 0) {
 
-        document.getElementById("searchMessage").innerText =
+        document.getElementById(
+          "searchMessage"
+        ).innerText =
           "Nenhum produto encontrado.";
 
       } else {
 
-        document.getElementById("searchMessage").innerText =
+        document.getElementById(
+          "searchMessage"
+        ).innerText =
           found +
           " produto(s) encontrado(s).";
 
@@ -676,7 +930,9 @@
 
 
       const buttons =
-        document.querySelectorAll(".category-button");
+        document.querySelectorAll(
+          ".category-button"
+        );
 
 
       let found = 0;
@@ -685,7 +941,9 @@
       products.forEach(function(product) {
 
         const productCategory =
-          product.getAttribute("data-category");
+          product.getAttribute(
+            "data-category"
+          );
 
 
         if (
@@ -710,8 +968,11 @@
 
         button.classList.remove("active");
 
+
         if (
-          button.getAttribute("data-category") === category
+          button.getAttribute(
+            "data-category"
+          ) === category
         ) {
 
           button.classList.add("active");
@@ -722,7 +983,9 @@
 
 
       const message =
-        document.getElementById("categoryMessage");
+        document.getElementById(
+          "categoryMessage"
+        );
 
 
       if (category === "todos") {
@@ -739,9 +1002,14 @@
       }
 
 
-      document.getElementById("searchInput").value = "";
+      document.getElementById(
+        "searchInput"
+      ).value = "";
 
-      document.getElementById("searchMessage").innerText = "";
+
+      document.getElementById(
+        "searchMessage"
+      ).innerText = "";
 
     }
 
@@ -779,7 +1047,9 @@
           function() {
 
             filterCategory(
-              button.getAttribute("data-category")
+              button.getAttribute(
+                "data-category"
+              )
             );
 
           }
@@ -787,7 +1057,5 @@
 
       });
 
-  </script>
-
-</body>
-  </html>
+  </script></body>
+      </html>
