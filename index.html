@@ -604,6 +604,28 @@
 </p>
 
   </footer>  <script>
+    </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+    const SUPABASE_URL =
+      "https://bkqcwommadypgnyixfjj.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_PMdvk3jREIXHdgql6u8Djw_L257wf9D";
+
+    const supabase =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
+
+    let cart = [];
+
+    let total = 0;
 
     let cart = [];
 
