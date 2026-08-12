@@ -464,9 +464,6 @@
 
       <div class="products">
 
-
-        <!-- PRODUTO 1 -->
-
         <article
           class="product"
           data-category="eletronicos"
@@ -496,8 +493,6 @@
 
         </article>
 
-
-        <!-- PRODUTO 2 -->
 
         <article
           class="product"
@@ -529,8 +524,6 @@
         </article>
 
 
-        <!-- PRODUTO 3 -->
-
         <article
           class="product"
           data-category="moda"
@@ -561,8 +554,6 @@
         </article>
 
 
-        <!-- PRODUTO 4 -->
-
         <article
           class="product"
           data-category="casa"
@@ -592,8 +583,6 @@
 
         </article>
 
-
-        <!-- PRODUTO 5 -->
 
         <article
           class="product"
@@ -722,7 +711,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-
   <script>
 
     // ==========================================
@@ -735,15 +723,7 @@
     const SUPABASE_KEY =
       "sb_publishable_PMdvk3jREIXHdgql6u8Djw_L257wf9D";
 
-
-    /*
-      O Supabase é inicializado com segurança.
-      Se a biblioteca não carregar, o carrinho
-      continua funcionando.
-    */
-
     let supabaseClient = null;
-
 
     if (window.supabase) {
 
@@ -774,9 +754,7 @@
       return cart.reduce(
         function(sum, item) {
 
-          return sum + Number(
-            item.price
-          );
+          return sum + Number(item.price);
 
         },
         0
@@ -785,10 +763,7 @@
     }
 
 
-    function addToCart(
-      name,
-      price
-    ) {
+    function addToCart(name, price) {
 
       cart.push({
 
@@ -798,9 +773,7 @@
 
       });
 
-
       updateCart();
-
 
       alert(
         name +
@@ -816,12 +789,7 @@
         return;
       }
 
-
-      cart.splice(
-        index,
-        1
-      );
-
+      cart.splice(index, 1);
 
       updateCart();
 
@@ -831,64 +799,38 @@
     function updateCart() {
 
       const cartItems =
-        document.getElementById(
-          "cartItems"
-        );
-
+        document.getElementById("cartItems");
 
       const totalElement =
-        document.getElementById(
-          "total"
-        );
+        document.getElementById("total");
 
-
-      if (
-        !cartItems ||
-        !totalElement
-      ) {
-
+      if (!cartItems || !totalElement) {
         return;
-
       }
-
 
       const total =
         calculateTotal();
 
 
-      if (
-        cart.length === 0
-      ) {
+      if (cart.length === 0) {
 
         cartItems.innerHTML =
           "<p>O carrinho está vazio.</p>";
 
       } else {
 
-        cartItems.innerHTML =
-          "";
-
+        cartItems.innerHTML = "";
 
         cart.forEach(
-          function(
-            item,
-            index
-          ) {
+          function(item, index) {
 
             const itemElement =
-              document.createElement(
-                "p"
-              );
-
+              document.createElement("p");
 
             itemElement.innerHTML =
               item.name +
               " - " +
-              Number(
-                item.price
-              ).toLocaleString(
-                "pt-AO"
-              ) +
+              Number(item.price).toLocaleString("pt-AO") +
               " Kz " +
 
               "<button " +
@@ -902,7 +844,6 @@
 
               "</button>";
 
-
             cartItems.appendChild(
               itemElement
             );
@@ -915,9 +856,7 @@
 
       totalElement.innerText =
         "Total: " +
-        total.toLocaleString(
-          "pt-AO"
-        ) +
+        total.toLocaleString("pt-AO") +
         " Kz";
 
     }
@@ -929,9 +868,7 @@
 
     function showCheckout() {
 
-      if (
-        cart.length === 0
-      ) {
+      if (cart.length === 0) {
 
         alert(
           "Adiciona pelo menos um produto ao carrinho."
@@ -941,21 +878,14 @@
 
       }
 
-
       const checkout =
-        document.getElementById(
-          "checkout"
-        );
-
+        document.getElementById("checkout");
 
       if (!checkout) {
         return;
       }
 
-
-      checkout.style.display =
-        "block";
-
+      checkout.style.display = "block";
 
       checkout.scrollIntoView({
         behavior: "smooth",
@@ -979,19 +909,13 @@
           "checkoutMessage"
         );
 
-
       if (!message) {
         return;
       }
 
+      message.style.display = "block";
 
-      message.style.display =
-        "block";
-
-
-      if (
-        type === "success"
-      ) {
+      if (type === "success") {
 
         message.style.background =
           "#dcfce7";
@@ -1009,9 +933,7 @@
 
       }
 
-
-      message.innerText =
-        text;
+      message.innerText = text;
 
     }
 
@@ -1022,9 +944,7 @@
 
     async function createOrder() {
 
-      if (
-        cart.length === 0
-      ) {
+      if (cart.length === 0) {
 
         alert(
           "O carrinho está vazio."
@@ -1040,18 +960,15 @@
           "customerName"
         );
 
-
       const phoneInput =
         document.getElementById(
           "customerPhone"
         );
 
-
       const locationInput =
         document.getElementById(
           "customerLocation"
         );
-
 
       const orderButton =
         document.getElementById(
@@ -1062,10 +979,8 @@
       const name =
         nameInput.value.trim();
 
-
       const phone =
         phoneInput.value.trim();
-
 
       const location =
         locationInput.value.trim();
@@ -1086,11 +1001,6 @@
 
       }
 
-
-      /*
-        Verificar se o Supabase carregou
-        antes de enviar a encomenda.
-      */
 
       if (!supabaseClient) {
 
@@ -1130,24 +1040,24 @@
 
       try {
 
-        orderButton.disabled =
-          true;
-
+        orderButton.disabled = true;
 
         orderButton.innerText =
           "⏳ A enviar...";
 
 
-        const {
-          data,
-          error
-        } =
+        /*
+          IMPORTANTE:
+          Não usamos .select() aqui.
+          O Supabase apenas cria a encomenda.
+        */
+
+        const { error } =
           await supabaseClient
             .from("orders")
             .insert([
               order
-            ])
-            .select();
+            ]);
 
 
         if (error) {
@@ -1156,7 +1066,6 @@
             "Erro Supabase:",
             error
           );
-
 
           showCheckoutMessage(
             "Erro ao criar a encomenda. Verifica o Supabase.",
@@ -1168,12 +1077,6 @@
         }
 
 
-        console.log(
-          "Encomenda criada:",
-          data
-        );
-
-
         showCheckoutMessage(
           "✅ Encomenda criada com sucesso!",
           "success"
@@ -1182,18 +1085,15 @@
 
         cart = [];
 
-
         updateCart();
 
 
-        nameInput.value =
-          "";
+        nameInput.value = "";
 
-        phoneInput.value =
-          "";
+        phoneInput.value = "";
 
-        locationInput.value =
-          "";
+        locationInput.value = "";
+
 
       } catch (error) {
 
@@ -1202,7 +1102,6 @@
           error
         );
 
-
         showCheckoutMessage(
           "Não foi possível enviar a encomenda.",
           "error"
@@ -1210,9 +1109,7 @@
 
       } finally {
 
-        orderButton.disabled =
-          false;
-
+        orderButton.disabled = false;
 
         orderButton.innerText =
           "✅ Confirmar encomenda";
@@ -1232,7 +1129,6 @@
         document.getElementById(
           "searchInput"
         );
-
 
       if (!input) {
         return;
@@ -1259,208 +1155,60 @@
 
       let found = 0;
 
-products.forEach(function(product) {
 
-  const text =
-    product.innerText.toLowerCase();
+      products.forEach(
+        function(product) {
 
-  if (
-    search === "" ||
-    text.includes(search)
-  ) {
+          const text =
+            product.innerText
+              .toLowerCase();
 
-    product.style.display = "";
-    found++;
 
-  } else {
+          if (
+            search === "" ||
+            text.includes(search)
+          ) {
 
-    product.style.display = "none";
+            product.style.display = "";
 
-  }
+            found++;
 
-});
+          } else {
 
+            product.style.display =
+              "none";
 
-if (!searchMessage) {
-  return;
-}
+          }
 
+        }
+      );
 
-if (search === "") {
 
-  searchMessage.innerText = "";
+      if (!searchMessage) {
+        return;
+      }
 
-} else if (found === 0) {
 
-  searchMessage.innerText =
-    "Nenhum produto encontrado.";
+      if (search === "") {
 
-} else {
+        searchMessage.innerText = "";
 
-  searchMessage.innerText =
-    found +
-    " produto(s) encontrado(s).";
+      } else if (found === 0) {
 
-}
+        searchMessage.innerText =
+          "Nenhum produto encontrado.";
 
-}
+      } else {
 
-
-// ==========================================
-// CATEGORIAS
-// ==========================================
-
-function filterCategory(category) {
-
-  const products =
-    document.querySelectorAll(".product");
-
-  const buttons =
-    document.querySelectorAll(".category-button");
-
-  const message =
-    document.getElementById("categoryMessage");
-
-  let found = 0;
-
-
-  products.forEach(function(product) {
-
-    const productCategory =
-      product.getAttribute("data-category");
-
-    if (
-      category === "todos" ||
-      productCategory === category
-    ) {
-
-      product.style.display = "";
-      found++;
-
-    } else {
-
-      product.style.display = "none";
-
-    }
-
-  });
-
-
-  buttons.forEach(function(button) {
-
-    button.classList.remove("active");
-
-    if (
-      button.getAttribute("data-category") === category
-    ) {
-
-      button.classList.add("active");
-
-    }
-
-  });
-
-
-  if (message) {
-
-    if (category === "todos") {
-
-      message.innerText =
-        "Todos os produtos";
-
-    } else {
-
-      message.innerText =
-        found +
-        " produto(s) nesta categoria.";
-
-    }
-
-  }
-
-
-  const searchInput =
-    document.getElementById("searchInput");
-
-  const searchMessage =
-    document.getElementById("searchMessage");
-
-
-  if (searchInput) {
-    searchInput.value = "";
-  }
-
-  if (searchMessage) {
-    searchMessage.innerText = "";
-  }
-
-}
-
-
-// ==========================================
-// BOTÃO DE PESQUISA
-// ==========================================
-
-document
-  .getElementById("searchButton")
-  .addEventListener(
-    "click",
-    searchProducts
-  );
-
-
-// ==========================================
-// ENTER NA PESQUISA
-// ==========================================
-
-document
-  .getElementById("searchInput")
-  .addEventListener(
-    "keydown",
-    function(event) {
-
-      if (event.key === "Enter") {
-
-        searchProducts();
+        searchMessage.innerText =
+          found +
+          " produto(s) encontrado(s).";
 
       }
 
     }
-  );
 
 
-// ==========================================
-// BOTÕES DE CATEGORIA
-// ==========================================
-
-document
-  .querySelectorAll(".category-button")
-  .forEach(function(button) {
-
-    button.addEventListener(
-      "click",
-      function() {
-
-        filterCategory(
-          button.getAttribute(
-            "data-category"
-          )
-        );
-
-      }
-    );
-
-  });
-
-
-// ==========================================
-// INICIAR CARRINHO
-// ==========================================
-
-updateCart();
-
-  </script>
-
-</body>
-</html>
-     
+    // ==========================================
+    // CATEGORIAS
+    // ==================================
