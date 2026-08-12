@@ -101,8 +101,6 @@
       margin-bottom: 15px;
     }
 
-    /* CATEGORIAS */
-
     .categories {
       display: grid;
       grid-template-columns: repeat(
@@ -137,8 +135,6 @@
       color: #6b7280;
       margin-bottom: 15px;
     }
-
-    /* PRODUTOS */
 
     .products {
       display: grid;
@@ -203,8 +199,6 @@
       background: #374151;
     }
 
-    /* CARRINHO */
-
     #cart {
       background: white;
       padding: 20px;
@@ -258,8 +252,6 @@
     #checkoutButton:hover {
       background: #15803d;
     }
-
-    /* CHECKOUT */
 
     #checkout {
       display: none;
@@ -317,8 +309,6 @@
       font-weight: bold;
     }
 
-    /* RODAPÉ */
-
     footer {
       text-align: center;
       padding: 25px;
@@ -330,8 +320,6 @@
     footer p {
       margin: 5px;
     }
-
-    /* TELEMÓVEL */
 
     @media (max-width: 500px) {
 
@@ -360,15 +348,10 @@
 
 <body>
 
-  <!-- CABEÇALHO -->
-
   <header>
     <h1>Kuanzashop</h1>
     <p>Compra fácil, vende fácil.</p>
   </header>
-
-
-  <!-- PESQUISA -->
 
   <section class="search">
 
@@ -396,10 +379,7 @@
 
   </section>
 
-
   <main>
-
-    <!-- CATEGORIAS -->
 
     <section>
 
@@ -451,9 +431,6 @@
 
     </section>
 
-
-    <!-- PRODUTOS -->
-
     <section>
 
       <h2>Produtos em destaque</h2>
@@ -493,7 +470,6 @@
 
         </article>
 
-
         <article
           class="product"
           data-category="eletronicos"
@@ -522,7 +498,6 @@
           </button>
 
         </article>
-
 
         <article
           class="product"
@@ -553,7 +528,6 @@
 
         </article>
 
-
         <article
           class="product"
           data-category="casa"
@@ -582,7 +556,6 @@
           </button>
 
         </article>
-
 
         <article
           class="product"
@@ -617,17 +590,12 @@
 
     </section>
 
-
-    <!-- CARRINHO -->
-
     <section id="cart">
 
       <h2>🛒 Carrinho</h2>
 
       <div id="cartItems">
-        <p>
-          O carrinho está vazio.
-        </p>
+        <p>O carrinho está vazio.</p>
       </div>
 
       <h3 id="total">
@@ -641,9 +609,6 @@
       >
         🛍️ Finalizar compra
       </button>
-
-
-      <!-- CHECKOUT -->
 
       <div id="checkout">
 
@@ -691,9 +656,6 @@
 
   </main>
 
-
-  <!-- RODAPÉ -->
-
   <footer>
 
     <p>
@@ -714,7 +676,7 @@
   <script>
 
     // ==========================================
-    // CONFIGURAÇÃO SUPABASE
+    // SUPABASE
     // ==========================================
 
     const SUPABASE_URL =
@@ -804,13 +766,17 @@
       const totalElement =
         document.getElementById("total");
 
-      if (!cartItems || !totalElement) {
+      if (
+        !cartItems ||
+        !totalElement
+      ) {
+
         return;
+
       }
 
       const total =
         calculateTotal();
-
 
       if (cart.length === 0) {
 
@@ -830,18 +796,16 @@
             itemElement.innerHTML =
               item.name +
               " - " +
-              Number(item.price).toLocaleString("pt-AO") +
+              Number(item.price)
+                .toLocaleString("pt-AO") +
               " Kz " +
-
               "<button " +
               "class='remove-button' " +
               "type='button' " +
               "onclick='removeFromCart(" +
               index +
               ")'>" +
-
               "Remover" +
-
               "</button>";
 
             cartItems.appendChild(
@@ -853,7 +817,6 @@
 
       }
 
-
       totalElement.innerText =
         "Total: " +
         total.toLocaleString("pt-AO") +
@@ -863,7 +826,7 @@
 
 
     // ==========================================
-    // FINALIZAR COMPRA
+    // CHECKOUT
     // ==========================================
 
     function showCheckout() {
@@ -885,7 +848,8 @@
         return;
       }
 
-      checkout.style.display = "block";
+      checkout.style.display =
+        "block";
 
       checkout.scrollIntoView({
         behavior: "smooth",
@@ -896,7 +860,7 @@
 
 
     // ==========================================
-    // MENSAGEM
+    // MENSAGEM DO CHECKOUT
     // ==========================================
 
     function showCheckoutMessage(
@@ -913,7 +877,8 @@
         return;
       }
 
-      message.style.display = "block";
+      message.style.display =
+        "block";
 
       if (type === "success") {
 
@@ -933,7 +898,8 @@
 
       }
 
-      message.innerText = text;
+      message.innerText =
+        text;
 
     }
 
@@ -953,7 +919,6 @@
         return;
 
       }
-
 
       const nameInput =
         document.getElementById(
@@ -975,7 +940,6 @@
           "orderButton"
         );
 
-
       const name =
         nameInput.value.trim();
 
@@ -984,7 +948,6 @@
 
       const location =
         locationInput.value.trim();
-
 
       if (
         name === "" ||
@@ -1001,7 +964,6 @@
 
       }
 
-
       if (!supabaseClient) {
 
         showCheckoutMessage(
@@ -1013,51 +975,54 @@
 
       }
 
-
       const total =
         calculateTotal();
 
 
+      /*
+        IMPORTANTE:
+        buyer_id não é enviado aqui.
+        O Supabase deve preencher
+        automaticamente através do
+        default/auth.
+      */
+
       const order = {
 
-        buyer_name:
-          name,
+        buyer_name: name,
 
-        buyer_phone:
-          phone,
+        buyer_phone: phone,
 
-        buyer_location:
-          location,
+        buyer_location: location,
 
-        total:
-          total,
+        total: total,
 
-        status:
-          "pending"
+        status: "pending"
 
       };
 
 
       try {
 
-        orderButton.disabled = true;
+        orderButton.disabled =
+          true;
 
         orderButton.innerText =
           "⏳ A enviar...";
 
 
-        /*
-          IMPORTANTE:
-          Não usamos .select() aqui.
-          O Supabase apenas cria a encomenda.
-        */
-
-        const { error } =
+        const result =
           await supabaseClient
             .from("orders")
-            .insert([
-              order
-            ]);
+            .insert([order])
+            .select();
+
+
+        const error =
+          result.error;
+
+        const data =
+          result.data;
 
 
         if (error) {
@@ -1077,6 +1042,12 @@
         }
 
 
+        console.log(
+          "Encomenda criada:",
+          data
+        );
+
+
         showCheckoutMessage(
           "✅ Encomenda criada com sucesso!",
           "success"
@@ -1086,7 +1057,6 @@
         cart = [];
 
         updateCart();
-
 
         nameInput.value = "";
 
@@ -1109,7 +1079,8 @@
 
       } finally {
 
-        orderButton.disabled = false;
+        orderButton.disabled =
+          false;
 
         orderButton.innerText =
           "✅ Confirmar encomenda";
@@ -1134,24 +1105,20 @@
         return;
       }
 
-
       const search =
         input.value
           .toLowerCase()
           .trim();
-
 
       const products =
         document.querySelectorAll(
           ".product"
         );
 
-
       const searchMessage =
         document.getElementById(
           "searchMessage"
         );
-
 
       let found = 0;
 
@@ -1162,7 +1129,6 @@
           const text =
             product.innerText
               .toLowerCase();
-
 
           if (
             search === "" ||
@@ -1184,25 +1150,25 @@
       );
 
 
-      if (!searchMessage) {
-        return;
-      }
+      if (searchMessage) {
 
+        if (search === "") {
 
-      if (search === "") {
+          searchMessage.innerText =
+            "";
 
-        searchMessage.innerText = "";
+        } else if (found === 0) {
 
-      } else if (found === 0) {
+          searchMessage.innerText =
+            "Nenhum produto encontrado.";
 
-        searchMessage.innerText =
-          "Nenhum produto encontrado.";
+        } else {
 
-      } else {
+          searchMessage.innerText =
+            found +
+            " produto(s) encontrado(s).";
 
-        searchMessage.innerText =
-          found +
-          " produto(s) encontrado(s).";
+        }
 
       }
 
@@ -1211,163 +1177,9 @@
 
     // ==========================================
     // CATEGORIAS
-    // ==================================
-
-
+    // ==========================================
 
     function filterCategory(category) {
 
       const products =
-        document.querySelectorAll(".product");
-
-      const buttons =
-        document.querySelectorAll(".category-button");
-
-      let found = 0;
-
-      products.forEach(function(product) {
-
-        const productCategory =
-          product.getAttribute("data-category");
-
-        if (
-          category === "todos" ||
-          productCategory === category
-        ) {
-
-          product.style.display = "";
-          found++;
-
-        } else {
-
-          product.style.display = "none";
-
-        }
-
-      });
-
-      buttons.forEach(function(button) {
-
-        button.classList.remove("active");
-
-        if (
-          button.getAttribute("data-category") === category
-        ) {
-
-          button.classList.add("active");
-
-        }
-
-      });
-
-      const message =
-        document.getElementById("categoryMessage");
-
-      if (message) {
-
-        if (category === "todos") {
-
-          message.innerText =
-            "Todos os produtos";
-
-        } else {
-
-          message.innerText =
-            found +
-            " produto(s) nesta categoria.";
-
-        }
-
-      }
-
-      const searchInput =
-        document.getElementById("searchInput");
-
-      const searchMessage =
-        document.getElementById("searchMessage");
-
-      if (searchInput) {
-        searchInput.value = "";
-      }
-
-      if (searchMessage) {
-        searchMessage.innerText = "";
-      }
-
-    }
-
-
-    // ==========================================
-    // BOTÃO PESQUISAR
-    // ==========================================
-
-    const searchButton =
-      document.getElementById("searchButton");
-
-    if (searchButton) {
-
-      searchButton.addEventListener(
-        "click",
-        searchProducts
-      );
-
-    }
-
-
-    // ==========================================
-    // ENTER NA PESQUISA
-    // ==========================================
-
-    const searchInput =
-      document.getElementById("searchInput");
-
-    if (searchInput) {
-
-      searchInput.addEventListener(
-        "keydown",
-        function(event) {
-
-          if (event.key === "Enter") {
-
-            searchProducts();
-
-          }
-
-        }
-      );
-
-    }
-
-
-    // ==========================================
-    // BOTÕES DE CATEGORIA
-    // ==========================================
-
-    document
-      .querySelectorAll(".category-button")
-      .forEach(function(button) {
-
-        button.addEventListener(
-          "click",
-          function() {
-
-            filterCategory(
-              button.getAttribute("data-category")
-            );
-
-          }
-        );
-
-      });
-
-
-    // ==========================================
-    // INICIAR CARRINHO
-    // ==========================================
-
-    updateCart();
-
-  </script>
-
-</body>
-</html>
+     
