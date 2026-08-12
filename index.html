@@ -464,6 +464,9 @@
 
       <div class="products">
 
+
+        <!-- PRODUTO 1 -->
+
         <article
           class="product"
           data-category="eletronicos"
@@ -493,6 +496,8 @@
 
         </article>
 
+
+        <!-- PRODUTO 2 -->
 
         <article
           class="product"
@@ -524,6 +529,8 @@
         </article>
 
 
+        <!-- PRODUTO 3 -->
+
         <article
           class="product"
           data-category="moda"
@@ -554,6 +561,8 @@
         </article>
 
 
+        <!-- PRODUTO 4 -->
+
         <article
           class="product"
           data-category="casa"
@@ -583,6 +592,8 @@
 
         </article>
 
+
+        <!-- PRODUTO 5 -->
 
         <article
           class="product"
@@ -625,7 +636,9 @@
       <h2>🛒 Carrinho</h2>
 
       <div id="cartItems">
-        <p>O carrinho está vazio.</p>
+        <p>
+          O carrinho está vazio.
+        </p>
       </div>
 
       <h3 id="total">
@@ -694,9 +707,13 @@
 
   <footer>
 
-    <p>© 2026 Kuanzashop</p>
+    <p>
+      © 2026 Kuanzashop
+    </p>
 
-    <p>Compra fácil, vende fácil.</p>
+    <p>
+      Compra fácil, vende fácil.
+    </p>
 
   </footer>
 
@@ -718,11 +735,31 @@
     const SUPABASE_KEY =
       "sb_publishable_PMdvk3jREIXHdgql6u8Djw_L257wf9D";
 
-    const supabaseClient =
-      window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
+
+    /*
+      O Supabase é inicializado com segurança.
+      Se a biblioteca não carregar, o carrinho
+      continua funcionando.
+    */
+
+    let supabaseClient = null;
+
+
+    if (window.supabase) {
+
+      supabaseClient =
+        window.supabase.createClient(
+          SUPABASE_URL,
+          SUPABASE_KEY
+        );
+
+    } else {
+
+      console.error(
+        "Supabase não carregou."
       );
+
+    }
 
 
     // ==========================================
@@ -736,7 +773,11 @@
 
       return cart.reduce(
         function(sum, item) {
-          return sum + Number(item.price);
+
+          return sum + Number(
+            item.price
+          );
+
         },
         0
       );
@@ -744,17 +785,26 @@
     }
 
 
-    function addToCart(name, price) {
+    function addToCart(
+      name,
+      price
+    ) {
 
       cart.push({
+
         name: name,
+
         price: Number(price)
+
       });
+
 
       updateCart();
 
+
       alert(
-        name + " foi adicionado ao carrinho!"
+        name +
+        " foi adicionado ao carrinho!"
       );
 
     }
@@ -766,7 +816,12 @@
         return;
       }
 
-      cart.splice(index, 1);
+
+      cart.splice(
+        index,
+        1
+      );
+
 
       updateCart();
 
@@ -776,41 +831,64 @@
     function updateCart() {
 
       const cartItems =
-        document.getElementById("cartItems");
+        document.getElementById(
+          "cartItems"
+        );
+
 
       const totalElement =
-        document.getElementById("total");
+        document.getElementById(
+          "total"
+        );
 
-      if (!cartItems || !totalElement) {
+
+      if (
+        !cartItems ||
+        !totalElement
+      ) {
+
         return;
+
       }
 
 
-      const total = calculateTotal();
+      const total =
+        calculateTotal();
 
 
-      if (cart.length === 0) {
+      if (
+        cart.length === 0
+      ) {
 
         cartItems.innerHTML =
           "<p>O carrinho está vazio.</p>";
 
       } else {
 
-        cartItems.innerHTML = "";
+        cartItems.innerHTML =
+          "";
 
 
         cart.forEach(
-          function(item, index) {
+          function(
+            item,
+            index
+          ) {
 
             const itemElement =
-              document.createElement("p");
+              document.createElement(
+                "p"
+              );
 
 
             itemElement.innerHTML =
               item.name +
               " - " +
-              Number(item.price)
-                .toLocaleString("pt-AO") +
+              Number(
+                item.price
+              ).toLocaleString(
+                "pt-AO"
+              ) +
               " Kz " +
 
               "<button " +
@@ -837,7 +915,9 @@
 
       totalElement.innerText =
         "Total: " +
-        total.toLocaleString("pt-AO") +
+        total.toLocaleString(
+          "pt-AO"
+        ) +
         " Kz";
 
     }
@@ -849,18 +929,23 @@
 
     function showCheckout() {
 
-      if (cart.length === 0) {
+      if (
+        cart.length === 0
+      ) {
 
         alert(
           "Adiciona pelo menos um produto ao carrinho."
         );
 
         return;
+
       }
 
 
       const checkout =
-        document.getElementById("checkout");
+        document.getElementById(
+          "checkout"
+        );
 
 
       if (!checkout) {
@@ -868,7 +953,8 @@
       }
 
 
-      checkout.style.display = "block";
+      checkout.style.display =
+        "block";
 
 
       checkout.scrollIntoView({
@@ -880,7 +966,7 @@
 
 
     // ==========================================
-    // MENSAGEM DO CHECKOUT
+    // MENSAGEM
     // ==========================================
 
     function showCheckoutMessage(
@@ -899,10 +985,13 @@
       }
 
 
-      message.style.display = "block";
+      message.style.display =
+        "block";
 
 
-      if (type === "success") {
+      if (
+        type === "success"
+      ) {
 
         message.style.background =
           "#dcfce7";
@@ -921,7 +1010,8 @@
       }
 
 
-      message.innerText = text;
+      message.innerText =
+        text;
 
     }
 
@@ -932,13 +1022,16 @@
 
     async function createOrder() {
 
-      if (cart.length === 0) {
+      if (
+        cart.length === 0
+      ) {
 
         alert(
           "O carrinho está vazio."
         );
 
         return;
+
       }
 
 
@@ -990,6 +1083,24 @@
         );
 
         return;
+
+      }
+
+
+      /*
+        Verificar se o Supabase carregou
+        antes de enviar a encomenda.
+      */
+
+      if (!supabaseClient) {
+
+        showCheckoutMessage(
+          "A ligação ao servidor não está disponível.",
+          "error"
+        );
+
+        return;
+
       }
 
 
@@ -999,39 +1110,44 @@
 
       const order = {
 
-        buyer_name: name,
+        buyer_name:
+          name,
 
-        buyer_phone: phone,
+        buyer_phone:
+          phone,
 
-        buyer_location: location,
+        buyer_location:
+          location,
 
-        total: total,
+        total:
+          total,
 
-        status: "pending"
+        status:
+          "pending"
 
       };
 
 
       try {
 
-        orderButton.disabled = true;
+        orderButton.disabled =
+          true;
+
 
         orderButton.innerText =
           "⏳ A enviar...";
 
 
-        const result =
+        const {
+          data,
+          error
+        } =
           await supabaseClient
             .from("orders")
-            .insert([order])
+            .insert([
+              order
+            ])
             .select();
-
-
-        const data =
-          result.data;
-
-        const error =
-          result.error;
 
 
         if (error) {
@@ -1043,11 +1159,12 @@
 
 
           showCheckoutMessage(
-            "Erro ao criar a encomenda. Verifica a ligação ao Supabase.",
+            "Erro ao criar a encomenda. Verifica o Supabase.",
             "error"
           );
 
           return;
+
         }
 
 
@@ -1063,21 +1180,20 @@
         );
 
 
-        // Limpar carrinho
-
         cart = [];
+
 
         updateCart();
 
 
-        // Limpar formulário
+        nameInput.value =
+          "";
 
-        nameInput.value = "";
+        phoneInput.value =
+          "";
 
-        phoneInput.value = "";
-
-        locationInput.value = "";
-
+        locationInput.value =
+          "";
 
       } catch (error) {
 
@@ -1088,13 +1204,15 @@
 
 
         showCheckoutMessage(
-          "Não foi possível enviar a encomenda. Tenta novamente.",
+          "Não foi possível enviar a encomenda.",
           "error"
         );
 
       } finally {
 
-        orderButton.disabled = false;
+        orderButton.disabled =
+          false;
+
 
         orderButton.innerText =
           "✅ Confirmar encomenda";
@@ -1142,77 +1260,4 @@
       let found = 0;
 
 
-      products.forEach(
-        function(product) {
-
-          const text =
-            product.innerText
-              .toLowerCase();
-
-
-          if (
-            search === "" ||
-            text.includes(search)
-          ) {
-
-            product.style.display =
-              "";
-
-            found++;
-
-          } else {
-
-            product.style.display =
-              "none";
-
-          }
-
-        }
-      );
-
-
-      if (!searchMessage) {
-        return;
-      }
-
-
-      if (search === "") {
-
-        searchMessage.innerText =
-          "";
-
-      } else if (found === 0) {
-
-        searchMessage.innerText =
-          "Nenhum produto encontrado.";
-
-      } else {
-
-        searchMessage.innerText =
-          found +
-          " produto(s) encontrado(s).";
-
-      }
-
-    }
-
-
-    // ==========================================
-    // CATEGORIAS
-    // ==========================================
-
-    function filterCategory(category) {
-
-      const products =
-        document.querySelectorAll(
-          ".product"
-        );
-
-
-      const buttons =
-        document.querySelectorAll(
-          ".category-button"
-        );
-
-
-  
+     
