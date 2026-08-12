@@ -1179,7 +1179,63 @@
     // CATEGORIAS
     // ==========================================
 
+    f
+
     function filterCategory(category) {
 
-      const products =
+  const products =
+    document.querySelectorAll(".product");
+
+  let found = 0;
+
+  products.forEach(function(product) {
+
+    const productCategory =
+      product.getAttribute("data-category");
+
+    if (
+      category === "todos" ||
+      productCategory === category
+    ) {
+
+      product.style.display = "";
+      found++;
+
+    } else {
+
+      product.style.display = "none";
+
+    }
+
+  });
+
+  const buttons =
+    document.querySelectorAll(".category-btn");
+
+  buttons.forEach(function(button) {
+
+    button.classList.remove("active");
+
+    if (
+      button.getAttribute("data-category") === category
+    ) {
+
+      button.classList.add("active");
+
+    }
+
+  });
+
+  const message =
+    document.getElementById("searchMessage");
+
+  if (message) {
+
+    message.innerText =
+      found +
+      " produto(s) encontrado(s).";
+
+  }
+
+    }
      
