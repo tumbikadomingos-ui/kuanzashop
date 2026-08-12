@@ -1212,3 +1212,162 @@
     // ==========================================
     // CATEGORIAS
     // ==================================
+
+
+
+    function filterCategory(category) {
+
+      const products =
+        document.querySelectorAll(".product");
+
+      const buttons =
+        document.querySelectorAll(".category-button");
+
+      let found = 0;
+
+      products.forEach(function(product) {
+
+        const productCategory =
+          product.getAttribute("data-category");
+
+        if (
+          category === "todos" ||
+          productCategory === category
+        ) {
+
+          product.style.display = "";
+          found++;
+
+        } else {
+
+          product.style.display = "none";
+
+        }
+
+      });
+
+      buttons.forEach(function(button) {
+
+        button.classList.remove("active");
+
+        if (
+          button.getAttribute("data-category") === category
+        ) {
+
+          button.classList.add("active");
+
+        }
+
+      });
+
+      const message =
+        document.getElementById("categoryMessage");
+
+      if (message) {
+
+        if (category === "todos") {
+
+          message.innerText =
+            "Todos os produtos";
+
+        } else {
+
+          message.innerText =
+            found +
+            " produto(s) nesta categoria.";
+
+        }
+
+      }
+
+      const searchInput =
+        document.getElementById("searchInput");
+
+      const searchMessage =
+        document.getElementById("searchMessage");
+
+      if (searchInput) {
+        searchInput.value = "";
+      }
+
+      if (searchMessage) {
+        searchMessage.innerText = "";
+      }
+
+    }
+
+
+    // ==========================================
+    // BOTÃO PESQUISAR
+    // ==========================================
+
+    const searchButton =
+      document.getElementById("searchButton");
+
+    if (searchButton) {
+
+      searchButton.addEventListener(
+        "click",
+        searchProducts
+      );
+
+    }
+
+
+    // ==========================================
+    // ENTER NA PESQUISA
+    // ==========================================
+
+    const searchInput =
+      document.getElementById("searchInput");
+
+    if (searchInput) {
+
+      searchInput.addEventListener(
+        "keydown",
+        function(event) {
+
+          if (event.key === "Enter") {
+
+            searchProducts();
+
+          }
+
+        }
+      );
+
+    }
+
+
+    // ==========================================
+    // BOTÕES DE CATEGORIA
+    // ==========================================
+
+    document
+      .querySelectorAll(".category-button")
+      .forEach(function(button) {
+
+        button.addEventListener(
+          "click",
+          function() {
+
+            filterCategory(
+              button.getAttribute("data-category")
+            );
+
+          }
+        );
+
+      });
+
+
+    // ==========================================
+    // INICIAR CARRINHO
+    // ==========================================
+
+    updateCart();
+
+  </script>
+
+</body>
+</html>
