@@ -972,7 +972,6 @@
         await supabaseClient
           .from("orders")
           .insert([order])
-          .select();
 
 
       if (error) {
