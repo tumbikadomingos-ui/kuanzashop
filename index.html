@@ -651,6 +651,230 @@
 
   }
 
+  // ==========================================
+// CONTA / AUTENTICAÇÃO
+// ==========================================
+
+async function registerUser() {
+
+  const email =
+    document.getElementById("emailInput").value.trim();
+
+  const password =
+    document.getElementById("passwordInput").value;
+
+  const message =
+    document.getElementById("accountMessage");
+
+  if (!email || !password) {
+    message.innerText =
+      "Preenche o email e a senha.";
+    message.style.color = "#dc2626";
+    return;
+  }
+
+  if (password.length < 6) {
+    message.innerText =
+      "A senha deve ter pelo menos 6 caracteres.";
+    message.style.color = "#dc2626";
+    return;
+  }
+
+  const { error } =
+    await supabaseClient.auth.signUp({
+      email: email,
+      password: password
+    });
+
+  if (error) {
+    message.innerText =
+      "Erro: " + error.message;
+    message.style.color = "#dc2626";
+    return;
+  }
+
+  message.innerText =
+    "✅ Conta criada! Verifica o teu email se for solicitado.";
+  message.style.color = "#16a34a";
+}
+
+
+// ==========================================
+// LOGIN
+// ==========================================
+
+async function loginUser() {
+
+  const email =
+    document.getElementById("emailInput").value.trim();
+
+  const password =
+    document.getElementById("passwordInput").value;
+
+  const message =
+    document.getElementById("accountMessage");
+
+  if (!email || !password) {
+    message.innerText =
+      "Preenche o email e a senha.";
+    message.style.color = "#dc2626";
+    return;
+  }
+
+  const { data, error } =
+    await supabaseClient.auth.signInWithPassword({
+      email: email,
+      password: password
+    });
+
+  if (error) {
+    message.innerText =
+      "Erro ao entrar: " + error.message;
+    message.style.color = "#dc2626";
+    return;
+  }
+
+  message.innerText =
+    "✅ Login realizado com sucesso!";
+  message.style.color = "#16a34a";
+
+  await updateAccountUI(data.user);
+
+}
+
+
+// ==========================================
+// LOGOUT
+// ==========================================
+
+async function logoutUser() {
+
+  const { error } =
+    await supabaseClient.auth.signOut();
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  updateAccountUI(null);
+
+}
+
+
+// ==========================================
+// VERIFICAR ADMIN
+// ==========================================
+
+async function checkAdmin() {
+
+  const { data, error } =
+    await supabaseClient.rpc("is_admin");
+
+  if (error) {
+    console.error(
+      "Erro ao verificar administrador:",
+      error
+    );
+
+    return false;
+  }
+
+  return data === true;
+
+}
+
+
+// ==========================================
+// ATUALIZAR INTERFACE DA CONTA
+// ==========================================
+
+async function updateAccountUI(user) {
+
+  const loggedOut =
+    document.getElementById("loggedOut");
+
+  const loggedIn =
+    document.getElementById("loggedIn");
+
+  const userEmail =
+    document.getElementById("userEmail");
+
+  const adminStatus =
+    document.getElementById("adminStatus");
+
+  if (!user) {
+
+    loggedOut.style.display = "block";
+    loggedIn.style.display = "none";
+
+    return;
+  }
+
+  loggedOut.style.display = "none";
+  loggedIn.style.display = "block";
+
+  userEmail.innerText =
+    "Conta: " + user.email;
+
+  const isAdmin =
+    await checkAdmin();
+
+  if (isAdmin) {
+
+    adminStatus.innerText =
+      "👑 Administrador";
+
+    adminStatus.style.color =
+      "#16a34a";
+
+  } else {
+
+    adminStatus.innerText =
+      "🛍️ Cliente";
+
+    adminStatus.style.color =
+      "#111827";
+
+  }
+
+}
+
+
+// ==========================================
+// VERIFICAR SESSÃO AO ABRIR
+// ==========================================
+
+async function checkSession() {
+
+  if (!supabaseClient) {
+    return;
+  }
+
+  const { data } =
+    await supabaseClient.auth.getSession();
+
+  await updateAccountUI(
+    data.session
+      ? data.session.user
+      : null
+  );
+
+
+  supabaseClient.auth.onAuthStateChange(
+    async function(event, session) {
+
+      await updateAccountUI(
+        session
+          ? session.user
+          : null
+      );
+
+    }
+  );
+
+      }
+
 
   // ==========================================
   // CARRINHO
