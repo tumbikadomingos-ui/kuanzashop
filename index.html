@@ -307,6 +307,108 @@
   <p>Compra fácil, vende fácil.</p>
 </header>
 
+  <section id="account" style="
+  background:white;
+  padding:20px 15px;
+  text-align:center;
+  border-bottom:1px solid #e5e7eb;
+">
+
+  <h2>👤 Minha conta</h2>
+
+  <div id="loggedOut">
+
+    <input
+      id="emailInput"
+      type="email"
+      placeholder="Email"
+      style="
+        width:100%;
+        max-width:400px;
+        padding:12px;
+        margin:6px;
+        border:1px solid #d1d5db;
+        border-radius:8px;
+      "
+    >
+
+    <input
+      id="passwordInput"
+      type="password"
+      placeholder="Senha"
+      style="
+        width:100%;
+        max-width:400px;
+        padding:12px;
+        margin:6px;
+        border:1px solid #d1d5db;
+        border-radius:8px;
+      "
+    >
+
+    <br>
+
+    <button
+      type="button"
+      onclick="loginUser()"
+      style="
+        padding:12px 20px;
+        margin:6px;
+        border:none;
+        border-radius:8px;
+        background:#111827;
+        color:white;
+        cursor:pointer;
+      "
+    >
+      🔐 Entrar
+    </button>
+
+    <button
+      type="button"
+      onclick="registerUser()"
+      style="
+        padding:12px 20px;
+        margin:6px;
+        border:none;
+        border-radius:8px;
+        background:#16a34a;
+        color:white;
+        cursor:pointer;
+      "
+    >
+      📝 Criar conta
+    </button>
+
+  </div>
+
+  <div id="loggedIn" style="display:none;">
+
+    <p id="userEmail"></p>
+
+    <p id="adminStatus"></p>
+
+    <button
+      type="button"
+      onclick="logoutUser()"
+      style="
+        padding:12px 20px;
+        border:none;
+        border-radius:8px;
+        background:#dc2626;
+        color:white;
+        cursor:pointer;
+      "
+    >
+      🚪 Sair
+    </button>
+
+  </div>
+
+  <p id="accountMessage"></p>
+
+</section>
+
 <section class="search">
 
   <h2>O que estás à procura?</h2>
