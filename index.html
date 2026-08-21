@@ -36,6 +36,58 @@
       color: #d1d5db;
     }
 
+    /* CONTA */
+
+    #account {
+      background: white;
+      padding: 20px 15px;
+      text-align: center;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    #account h2 {
+      margin-bottom: 15px;
+    }
+
+    .account-input {
+      width: 100%;
+      max-width: 400px;
+      padding: 12px;
+      margin: 6px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .account-button {
+      padding: 12px 20px;
+      margin: 6px;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .login-button {
+      background: #111827;
+    }
+
+    .register-button {
+      background: #16a34a;
+    }
+
+    .logout-button {
+      background: #dc2626;
+    }
+
+    #accountMessage {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    /* PESQUISA */
+
     .search {
       padding: 20px 15px;
       background: white;
@@ -78,6 +130,8 @@
       margin: 12px auto 0;
       color: #6b7280;
     }
+
+    /* MAIN */
 
     main {
       max-width: 1100px;
@@ -152,6 +206,13 @@
       justify-content: center;
       font-size: 50px;
       margin-bottom: 15px;
+      overflow: hidden;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .product h3 {
@@ -178,6 +239,11 @@
       color: white;
       cursor: pointer;
       font-size: 15px;
+    }
+
+    .cart-button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
     }
 
     /* CARRINHO */
@@ -267,6 +333,8 @@
       font-weight: bold;
     }
 
+    /* FOOTER */
+
     footer {
       text-align: center;
       padding: 25px;
@@ -274,6 +342,8 @@
       background: #111827;
       color: white;
     }
+
+    /* MOBILE */
 
     @media (max-width: 500px) {
 
@@ -303,16 +373,21 @@
 <body>
 
 <header>
+
   <h1>Kuanzashop</h1>
-  <p>Compra fácil, vende fácil.</p>
+
+  <p>
+    Compra fácil, vende fácil.
+  </p>
+
 </header>
 
-  <section id="account" style="
-  background:white;
-  padding:20px 15px;
-  text-align:center;
-  border-bottom:1px solid #e5e7eb;
-">
+
+<!-- ==========================================
+     CONTA
+========================================== -->
+
+<section id="account">
 
   <h2>👤 Minha conta</h2>
 
@@ -320,67 +395,40 @@
 
     <input
       id="emailInput"
+      class="account-input"
       type="email"
       placeholder="Email"
-      style="
-        width:100%;
-        max-width:400px;
-        padding:12px;
-        margin:6px;
-        border:1px solid #d1d5db;
-        border-radius:8px;
-      "
+      autocomplete="email"
     >
 
     <input
       id="passwordInput"
+      class="account-input"
       type="password"
       placeholder="Senha"
-      style="
-        width:100%;
-        max-width:400px;
-        padding:12px;
-        margin:6px;
-        border:1px solid #d1d5db;
-        border-radius:8px;
-      "
+      autocomplete="current-password"
     >
 
     <br>
 
     <button
       type="button"
+      class="account-button login-button"
       onclick="loginUser()"
-      style="
-        padding:12px 20px;
-        margin:6px;
-        border:none;
-        border-radius:8px;
-        background:#111827;
-        color:white;
-        cursor:pointer;
-      "
     >
       🔐 Entrar
     </button>
 
     <button
       type="button"
+      class="account-button register-button"
       onclick="registerUser()"
-      style="
-        padding:12px 20px;
-        margin:6px;
-        border:none;
-        border-radius:8px;
-        background:#16a34a;
-        color:white;
-        cursor:pointer;
-      "
     >
       📝 Criar conta
     </button>
 
   </div>
+
 
   <div id="loggedIn" style="display:none;">
 
@@ -390,24 +438,23 @@
 
     <button
       type="button"
+      class="account-button logout-button"
       onclick="logoutUser()"
-      style="
-        padding:12px 20px;
-        border:none;
-        border-radius:8px;
-        background:#dc2626;
-        color:white;
-        cursor:pointer;
-      "
     >
       🚪 Sair
     </button>
 
   </div>
 
+
   <p id="accountMessage"></p>
 
 </section>
+
+
+<!-- ==========================================
+     PESQUISA
+========================================== -->
 
 <section class="search">
 
@@ -435,9 +482,13 @@
 
 </section>
 
+
 <main>
 
-  <!-- CATEGORIAS -->
+
+  <!-- ========================================
+       CATEGORIAS
+  ========================================= -->
 
   <section>
 
@@ -490,170 +541,42 @@
   </section>
 
 
-  <!-- PRODUTOS -->
+  <!-- ========================================
+       PRODUTOS
+  ========================================= -->
 
   <section>
 
     <h2>Produtos em destaque</h2>
 
     <p id="categoryMessage">
-      Todos os produtos
+      Carregando produtos...
     </p>
 
-    <div class="products">
-
-      <article
-        class="product"
-        data-category="eletronicos"
-      >
-
-        <div class="product-image">📱</div>
-
-        <h3>Smartphone</h3>
-
-        <p>
-          Smartphone disponível no Kuanzashop.
-        </p>
-
-        <p class="price">
-          1.000 Kz
-        </p>
-
-        <button
-          class="cart-button"
-          type="button"
-          onclick="addToCart('Smartphone', 1000)"
-        >
-          Adicionar ao carrinho
-        </button>
-
-      </article>
-
-
-      <article
-        class="product"
-        data-category="eletronicos"
-      >
-
-        <div class="product-image">🎧</div>
-
-        <h3>Fones de ouvido</h3>
-
-        <p>
-          Fones de ouvido de qualidade.
-        </p>
-
-        <p class="price">
-          2.500 Kz
-        </p>
-
-        <button
-          class="cart-button"
-          type="button"
-          onclick="addToCart('Fones de ouvido', 2500)"
-        >
-          Adicionar ao carrinho
-        </button>
-
-      </article>
-
-
-      <article
-        class="product"
-        data-category="moda"
-      >
-
-        <div class="product-image">👕</div>
-
-        <h3>Camiseta</h3>
-
-        <p>
-          Produtos de moda para todos.
-        </p>
-
-        <p class="price">
-          3.000 Kz
-        </p>
-
-        <button
-          class="cart-button"
-          type="button"
-          onclick="addToCart('Camiseta', 3000)"
-        >
-          Adicionar ao carrinho
-        </button>
-
-      </article>
-
-
-      <article
-        class="product"
-        data-category="casa"
-      >
-
-        <div class="product-image">🏠</div>
-
-        <h3>Produto para casa</h3>
-
-        <p>
-          Encontre produtos úteis para sua casa.
-        </p>
-
-        <p class="price">
-          4.500 Kz
-        </p>
-
-        <button
-          class="cart-button"
-          type="button"
-          onclick="addToCart('Produto para casa', 4500)"
-        >
-          Adicionar ao carrinho
-        </button>
-
-      </article>
-
-
-      <article
-        class="product"
-        data-category="alimentos"
-      >
-
-        <div class="product-image">🍎</div>
-
-        <h3>Alimentos</h3>
-
-        <p>
-          Produtos alimentares disponíveis.
-        </p>
-
-        <p class="price">
-          2.000 Kz
-        </p>
-
-        <button
-          class="cart-button"
-          type="button"
-          onclick="addToCart('Alimentos', 2000)"
-        >
-          Adicionar ao carrinho
-        </button>
-
-      </article>
+    <div
+      class="products"
+      id="productsContainer"
+    >
 
     </div>
 
   </section>
 
 
-  <!-- CARRINHO -->
+  <!-- ========================================
+       CARRINHO
+  ========================================= -->
 
   <section id="cart">
 
     <h2>🛒 Carrinho</h2>
 
     <div id="cartItems">
-      <p>O carrinho está vazio.</p>
+
+      <p>
+        O carrinho está vazio.
+      </p>
+
     </div>
 
     <h3 id="total">
@@ -677,11 +600,14 @@
         📦 Dados da encomenda
       </h3>
 
+      <br>
+
       <input
         class="checkout-input"
         type="text"
         id="customerName"
         placeholder="Nome completo"
+        autocomplete="name"
       >
 
       <input
@@ -689,6 +615,7 @@
         type="tel"
         id="customerPhone"
         placeholder="Número de telefone"
+        autocomplete="tel"
       >
 
       <input
@@ -696,6 +623,7 @@
         type="text"
         id="customerLocation"
         placeholder="Localização / endereço"
+        autocomplete="street-address"
       >
 
       <button
@@ -714,23 +642,31 @@
 
 </main>
 
+
 <footer>
 
-  <p>© 2026 Kuanzashop</p>
+  <p>
+    © 2026 Kuanzashop
+  </p>
 
-  <p>Compra fácil, vende fácil.</p>
+  <p>
+    Compra fácil, vende fácil.
+  </p>
 
 </footer>
 
 
-<!-- SUPABASE -->
+<!-- ==========================================
+     SUPABASE
+========================================== -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
 <script>
 
   // ==========================================
-  // SUPABASE
+  // CONFIGURAÇÃO SUPABASE
   // ==========================================
 
   const SUPABASE_URL =
@@ -741,6 +677,10 @@
 
 
   let supabaseClient = null;
+
+  let currentUser = null;
+
+  let cart = [];
 
 
   if (window.supabase) {
@@ -753,244 +693,804 @@
 
   }
 
+
   // ==========================================
-// CONTA / AUTENTICAÇÃO
-// ==========================================
+  // UTILITÁRIO
+  // ==========================================
 
-async function registerUser() {
+  function formatKz(value) {
 
-  const email =
-    document.getElementById("emailInput").value.trim();
-
-  const password =
-    document.getElementById("passwordInput").value;
-
-  const message =
-    document.getElementById("accountMessage");
-
-  if (!email || !password) {
-    message.innerText =
-      "Preenche o email e a senha.";
-    message.style.color = "#dc2626";
-    return;
-  }
-
-  if (password.length < 6) {
-    message.innerText =
-      "A senha deve ter pelo menos 6 caracteres.";
-    message.style.color = "#dc2626";
-    return;
-  }
-
-  const { error } =
-    await supabaseClient.auth.signUp({
-      email: email,
-      password: password
-    });
-
-  if (error) {
-    message.innerText =
-      "Erro: " + error.message;
-    message.style.color = "#dc2626";
-    return;
-  }
-
-  message.innerText =
-    "✅ Conta criada! Verifica o teu email se for solicitado.";
-  message.style.color = "#16a34a";
-}
-
-
-// ==========================================
-// LOGIN
-// ==========================================
-
-async function loginUser() {
-
-  const email =
-    document.getElementById("emailInput").value.trim();
-
-  const password =
-    document.getElementById("passwordInput").value;
-
-  const message =
-    document.getElementById("accountMessage");
-
-  if (!email || !password) {
-    message.innerText =
-      "Preenche o email e a senha.";
-    message.style.color = "#dc2626";
-    return;
-  }
-
-  const { data, error } =
-    await supabaseClient.auth.signInWithPassword({
-      email: email,
-      password: password
-    });
-
-  if (error) {
-    message.innerText =
-      "Erro ao entrar: " + error.message;
-    message.style.color = "#dc2626";
-    return;
-  }
-
-  message.innerText =
-    "✅ Login realizado com sucesso!";
-  message.style.color = "#16a34a";
-
-  await updateAccountUI(data.user);
-
-}
-
-
-// ==========================================
-// LOGOUT
-// ==========================================
-
-async function logoutUser() {
-
-  const { error } =
-    await supabaseClient.auth.signOut();
-
-  if (error) {
-    console.error(error);
-    return;
-  }
-
-  updateAccountUI(null);
-
-}
-
-
-// ==========================================
-// VERIFICAR ADMIN
-// ==========================================
-
-async function checkAdmin() {
-
-  const { data, error } =
-    await supabaseClient.rpc("is_admin");
-
-  if (error) {
-    console.error(
-      "Erro ao verificar administrador:",
-      error
-    );
-
-    return false;
-  }
-
-  return data === true;
-
-}
-
-
-// ==========================================
-// ATUALIZAR INTERFACE DA CONTA
-// ==========================================
-
-async function updateAccountUI(user) {
-
-  const loggedOut =
-    document.getElementById("loggedOut");
-
-  const loggedIn =
-    document.getElementById("loggedIn");
-
-  const userEmail =
-    document.getElementById("userEmail");
-
-  const adminStatus =
-    document.getElementById("adminStatus");
-
-  if (!user) {
-
-    loggedOut.style.display = "block";
-    loggedIn.style.display = "none";
-
-    return;
-  }
-
-  loggedOut.style.display = "none";
-  loggedIn.style.display = "block";
-
-  userEmail.innerText =
-    "Conta: " + user.email;
-
-  const isAdmin =
-    await checkAdmin();
-
-  if (isAdmin) {
-
-    adminStatus.innerText =
-      "👑 Administrador";
-
-    adminStatus.style.color =
-      "#16a34a";
-
-  } else {
-
-    adminStatus.innerText =
-      "🛍️ Cliente";
-
-    adminStatus.style.color =
-      "#111827";
+    return Number(value || 0)
+      .toLocaleString("pt-AO") +
+      " Kz";
 
   }
 
-}
 
+  // ==========================================
+  // REGISTRO
+  // ==========================================
 
-// ==========================================
-// VERIFICAR SESSÃO AO ABRIR
-// ==========================================
+  async function registerUser() {
 
-async function checkSession() {
+    if (!supabaseClient) {
 
-  if (!supabaseClient) {
-    return;
-  }
-
-  const { data } =
-    await supabaseClient.auth.getSession();
-
-  await updateAccountUI(
-    data.session
-      ? data.session.user
-      : null
-  );
-
-
-  supabaseClient.auth.onAuthStateChange(
-    async function(event, session) {
-
-      await updateAccountUI(
-        session
-          ? session.user
-          : null
-      );
+      return;
 
     }
-  );
+
+
+    const email =
+      document
+        .getElementById("emailInput")
+        .value
+        .trim();
+
+
+    const password =
+      document
+        .getElementById("passwordInput")
+        .value;
+
+
+    const message =
+      document
+        .getElementById("accountMessage");
+
+
+    if (!email || !password) {
+
+      message.innerText =
+        "Preenche o email e a senha.";
+
+      message.style.color =
+        "#dc2626";
+
+      return;
+
+    }
+
+
+    if (password.length < 6) {
+
+      message.innerText =
+        "A senha deve ter pelo menos 6 caracteres.";
+
+      message.style.color =
+        "#dc2626";
+
+      return;
+
+    }
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient.auth.signUp({
+
+        email: email,
+
+        password: password
+
+      });
+
+
+    if (error) {
+
+      message.innerText =
+        "Erro: " +
+        error.message;
+
+      message.style.color =
+        "#dc2626";
+
+      return;
+
+    }
+
+
+    if (
+      data.user &&
+      !data.session
+    ) {
+
+      message.innerText =
+        "✅ Conta criada! Verifica o teu email para confirmar a conta.";
+
+    } else {
+
+      message.innerText =
+        "✅ Conta criada com sucesso!";
+
+    }
+
+
+    message.style.color =
+      "#16a34a";
+
+  }
+
+
+  // ==========================================
+  // LOGIN
+  // ==========================================
+
+  async function loginUser() {
+
+    if (!supabaseClient) {
+
+      return;
+
+    }
+
+
+    const email =
+      document
+        .getElementById("emailInput")
+        .value
+        .trim();
+
+
+    const password =
+      document
+        .getElementById("passwordInput")
+        .value;
+
+
+    const message =
+      document
+        .getElementById("accountMessage");
+
+
+    if (!email || !password) {
+
+      message.innerText =
+        "Preenche o email e a senha.";
+
+      message.style.color =
+        "#dc2626";
+
+      return;
+
+    }
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient.auth.signInWithPassword({
+
+        email: email,
+
+        password: password
+
+      });
+
+
+    if (error) {
+
+      message.innerText =
+        "Erro ao entrar: " +
+        error.message;
+
+      message.style.color =
+        "#dc2626";
+
+      return;
+
+    }
+
+
+    currentUser =
+      data.user;
+
+
+    message.innerText =
+      "✅ Login realizado com sucesso!";
+
+    message.style.color =
+      "#16a34a";
+
+
+    await updateAccountUI(
+      currentUser
+    );
+
+  }
+
+
+  // ==========================================
+  // LOGOUT
+  // ==========================================
+
+  async function logoutUser() {
+
+    if (!supabaseClient) {
+
+      return;
+
+    }
+
+
+    const {
+      error
+    } =
+      await supabaseClient.auth.signOut();
+
+
+    if (error) {
+
+      console.error(error);
+
+      return;
+
+    }
+
+
+    currentUser = null;
+
+    updateAccountUI(null);
+
+  }
+
+
+  // ==========================================
+  // VERIFICAR ADMIN
+  // ==========================================
+
+  async function checkAdmin() {
+
+    if (!supabaseClient) {
+
+      return false;
+
+    }
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient.rpc(
+        "is_admin"
+      );
+
+
+    if (error) {
+
+      console.error(
+        "Erro ao verificar administrador:",
+        error
+      );
+
+      return false;
+
+    }
+
+
+    return data === true;
+
+  }
+
+
+  // ==========================================
+  // ATUALIZAR INTERFACE DA CONTA
+  // ==========================================
+
+  async function updateAccountUI(user) {
+
+    const loggedOut =
+      document.getElementById(
+        "loggedOut"
+      );
+
+
+    const loggedIn =
+      document.getElementById(
+        "loggedIn"
+      );
+
+
+    const userEmail =
+      document.getElementById(
+        "userEmail"
+      );
+
+
+    const adminStatus =
+      document.getElementById(
+        "adminStatus"
+      );
+
+
+    if (!user) {
+
+      loggedOut.style.display =
+        "block";
+
+      loggedIn.style.display =
+        "none";
+
+      return;
+
+    }
+
+
+    loggedOut.style.display =
+      "none";
+
+    loggedIn.style.display =
+      "block";
+
+
+    userEmail.innerText =
+      "Conta: " +
+      user.email;
+
+
+    const isAdmin =
+      await checkAdmin();
+
+
+    if (isAdmin) {
+
+      adminStatus.innerText =
+        "👑 Administrador";
+
+      adminStatus.style.color =
+        "#16a34a";
+
+    } else {
+
+      adminStatus.innerText =
+        "🛍️ Cliente";
+
+      adminStatus.style.color =
+        "#111827";
+
+    }
+
+  }
+
+
+  // ==========================================
+  // SESSÃO
+  // ==========================================
+
+  async function checkSession() {
+
+    if (!supabaseClient) {
+
+      return;
+
+    }
+
+
+    const {
+      data
+    } =
+      await supabaseClient.auth.getSession();
+
+
+    if (
+      data &&
+      data.session
+    ) {
+
+      currentUser =
+        data.session.user;
+
+      await updateAccountUI(
+        currentUser
+      );
+
+    } else {
+
+      currentUser = null;
+
+      await updateAccountUI(null);
+
+    }
+
+
+    supabaseClient.auth.onAuthStateChange(
+      async function(
+        event,
+        session
+      ) {
+
+        currentUser =
+          session
+            ? session.user
+            : null;
+
+
+        await updateAccountUI(
+          currentUser
+        );
 
       }
+    );
+
+  }
+
+
+  // ==========================================
+  // PRODUTOS
+  // ==========================================
+
+  async function loadProducts() {
+
+    const container =
+      document.getElementById(
+        "productsContainer"
+      );
+
+
+    const message =
+      document.getElementById(
+        "categoryMessage"
+      );
+
+
+    if (!supabaseClient) {
+
+      message.innerText =
+        "Supabase não está disponível.";
+
+      return;
+
+    }
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("products")
+        .select(`
+          id,
+          product_id,
+          seller_id,
+          name,
+          description,
+          "Price",
+          stock,
+          category,
+          Image_ur1
+        `)
+        .order(
+          "created_at",
+          {
+            ascending: false
+          }
+        );
+
+
+    if (error) {
+
+      console.error(
+        "Erro ao carregar produtos:",
+        error
+      );
+
+
+      message.innerText =
+        "Erro ao carregar produtos: " +
+        error.message;
+
+      return;
+
+    }
+
+
+    container.innerHTML = "";
+
+
+    if (
+      !data ||
+      data.length === 0
+    ) {
+
+      message.innerText =
+        "Nenhum produto disponível.";
+
+      return;
+
+    }
+
+
+    data.forEach(
+      function(product) {
+
+        const article =
+          document.createElement(
+            "article"
+          );
+
+
+        article.className =
+          "product";
+
+
+        article.dataset.category =
+          normalizeCategory(
+            product.category
+          );
+
+
+        const image =
+          document.createElement(
+            "div"
+          );
+
+
+        image.className =
+          "product-image";
+
+
+        if (
+          product.Image_ur1
+        ) {
+
+          const img =
+            document.createElement(
+              "img"
+            );
+
+
+          img.src =
+            product.Image_ur1;
+
+          img.alt =
+            product.name;
+
+          img.onerror =
+            function() {
+
+              image.innerHTML =
+                "🛍️";
+
+            };
+
+
+          image.appendChild(img);
+
+        } else {
+
+          image.innerText =
+            getCategoryEmoji(
+              product.category
+            );
+
+        }
+
+
+        const title =
+          document.createElement(
+            "h3"
+          );
+
+
+        title.innerText =
+          product.name;
+
+
+        const description =
+          document.createElement(
+            "p"
+          );
+
+
+        description.innerText =
+          product.description ||
+          "Produto disponível no Kuanzashop.";
+
+
+        const price =
+          document.createElement(
+            "p"
+          );
+
+
+        price.className =
+          "price";
+
+
+        price.innerText =
+          formatKz(
+            product.Price
+          );
+
+
+        const button =
+          document.createElement(
+            "button"
+          );
+
+
+        button.type =
+          "button";
+
+        button.className =
+          "cart-button";
+
+
+        if (
+          Number(product.stock) <= 0
+        ) {
+
+          button.innerText =
+            "Sem stock";
+
+          button.disabled =
+            true;
+
+        } else {
+
+          button.innerText =
+            "Adicionar ao carrinho";
+
+
+          button.onclick =
+            function() {
+
+              addToCart(
+                product
+              );
+
+            };
+
+        }
+
+
+        article.appendChild(
+          image
+        );
+
+        article.appendChild(
+          title
+        );
+
+        article.appendChild(
+          description
+        );
+
+        article.appendChild(
+          price
+        );
+
+        article.appendChild(
+          button
+        );
+
+
+        container.appendChild(
+          article
+        );
+
+      }
+    );
+
+
+    message.innerText =
+      data.length +
+      " produto(s) disponível(is).";
+
+
+    filterCategory(
+      "todos"
+    );
+
+  }
+
+
+  // ==========================================
+  // NORMALIZAR CATEGORIA
+  // ==========================================
+
+  function normalizeCategory(
+    category
+  ) {
+
+    if (!category) {
+
+      return "";
+
+    }
+
+
+    return String(category)
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(
+        /[\u0300-\u036f]/g,
+        ""
+      )
+      .replace(
+        /\s+/g,
+        ""
+      );
+
+  }
+
+
+  // ==========================================
+  // EMOJI DA CATEGORIA
+  // ==========================================
+
+  function getCategoryEmoji(
+    category
+  ) {
+
+    const value =
+      normalizeCategory(
+        category
+      );
+
+
+    if (
+      value.includes("eletron")
+    ) {
+
+      return "📱";
+
+    }
+
+
+    if (
+      value.includes("moda")
+    ) {
+
+      return "👕";
+
+    }
+
+
+    if (
+      value.includes("casa")
+    ) {
+
+      return "🏠";
+
+    }
+
+
+    if (
+      value.includes("aliment")
+    ) {
+
+      return "🍎";
+
+    }
+
+
+    return "🛍️";
+
+  }
 
 
   // ==========================================
   // CARRINHO
   // ==========================================
 
-  let cart = [];
-
-
   function calculateTotal() {
 
     return cart.reduce(
-      function(sum, item) {
+      function(
+        sum,
+        item
+      ) {
 
-        return sum + Number(item.price);
+        return sum +
+          (
+            Number(item.price) *
+            Number(item.quantity)
+          );
 
       },
       0
@@ -999,73 +1499,269 @@ async function checkSession() {
   }
 
 
-  function addToCart(name, price) {
+  // ==========================================
+  // ADICIONAR AO CARRINHO
+  // ==========================================
 
-    cart.push({
-      name: name,
-      price: Number(price)
-    });
+  function addToCart(
+    product
+  ) {
+
+    if (!product) {
+
+      return;
+
+    }
+
+
+    const productId =
+      product.product_id;
+
+
+    if (!productId) {
+
+      alert(
+        "Este produto não possui um ID válido."
+      );
+
+      return;
+
+    }
+
+
+    const existing =
+      cart.find(
+        function(item) {
+
+          return item.product_id ===
+            productId;
+
+        }
+      );
+
+
+    if (existing) {
+
+      if (
+        Number(existing.quantity) <
+        Number(product.stock)
+      ) {
+
+        existing.quantity++;
+
+      } else {
+
+        alert(
+          "Quantidade máxima disponível em stock."
+        );
+
+        return;
+
+      }
+
+    } else {
+
+      cart.push({
+
+        product_id:
+          productId,
+
+        name:
+          product.name,
+
+        price:
+          Number(product.Price),
+
+        quantity:
+          1,
+
+        stock:
+          Number(product.stock)
+
+      });
+
+    }
+
 
     updateCart();
 
+
     alert(
-      name +
+      product.name +
       " foi adicionado ao carrinho!"
     );
 
   }
 
 
-  function removeFromCart(index) {
+  // ==========================================
+  // REMOVER
+  // ==========================================
+
+  function removeFromCart(
+    index
+  ) {
 
     if (!cart[index]) {
+
       return;
+
     }
 
-    cart.splice(index, 1);
+
+    cart.splice(
+      index,
+      1
+    );
+
 
     updateCart();
 
   }
 
 
-  function updateCart() {
+  // ==========================================
+  // ALTERAR QUANTIDADE
+  // ==========================================
 
-    const cartItems =
-      document.getElementById("cartItems");
+  function changeQuantity(
+    index,
+    amount
+  ) {
 
-    const totalElement =
-      document.getElementById("total");
+    const item =
+      cart[index];
 
 
-    if (!cartItems || !totalElement) {
+    if (!item) {
+
       return;
+
     }
 
 
-    if (cart.length === 0) {
+    const newQuantity =
+      Number(item.quantity) +
+      Number(amount);
+
+
+    if (
+      newQuantity <= 0
+    ) {
+
+      removeFromCart(index);
+
+      return;
+
+    }
+
+
+    if (
+      newQuantity >
+      Number(item.stock)
+    ) {
+
+      alert(
+        "Não há stock suficiente."
+      );
+
+      return;
+
+    }
+
+
+    item.quantity =
+      newQuantity;
+
+
+    updateCart();
+
+  }
+
+
+  // ==========================================
+  // ATUALIZAR CARRINHO
+  // ==========================================
+
+  function updateCart() {
+
+    const cartItems =
+      document.getElementById(
+        "cartItems"
+      );
+
+
+    const totalElement =
+      document.getElementById(
+        "total"
+      );
+
+
+    if (
+      !cartItems ||
+      !totalElement
+    ) {
+
+      return;
+
+    }
+
+
+    if (
+      cart.length === 0
+    ) {
 
       cartItems.innerHTML =
         "<p>O carrinho está vazio.</p>";
 
     } else {
 
-      cartItems.innerHTML = "";
+      cartItems.innerHTML =
+        "";
 
 
       cart.forEach(
-        function(item, index) {
+        function(
+          item,
+          index
+        ) {
 
           const p =
-            document.createElement("p");
+            document.createElement(
+              "p"
+            );
 
 
           p.innerHTML =
-            item.name +
-            " - " +
-            Number(item.price)
-              .toLocaleString("pt-AO") +
-            " Kz " +
+            "<strong>" +
+            escapeHtml(
+              item.name
+            ) +
+            "</strong> - " +
+            formatKz(
+              item.price
+            ) +
+            "<br>" +
+
+            "Quantidade: " +
+
+            "<button " +
+            "type='button' " +
+            "onclick='changeQuantity(" +
+            index +
+            ", -1)'>" +
+            "-" +
+            "</button> " +
+
+            item.quantity +
+
+            " <button " +
+            "type='button' " +
+            "onclick='changeQuantity(" +
+            index +
+            ", 1)'>" +
+            "+" +
+            "</button> " +
 
             "<button " +
             "class='remove-button' " +
@@ -1079,7 +1775,10 @@ async function checkSession() {
             "</button>";
 
 
-          cartItems.appendChild(p);
+
+          cartItems.appendChild(
+            p
+          );
 
         }
       );
@@ -1089,9 +1788,42 @@ async function checkSession() {
 
     totalElement.innerText =
       "Total: " +
-      calculateTotal()
-        .toLocaleString("pt-AO") +
-      " Kz";
+      formatKz(
+        calculateTotal()
+      );
+
+  }
+
+
+  // ==========================================
+  // ESCAPAR HTML
+  // ==========================================
+
+  function escapeHtml(
+    value
+  ) {
+
+    return String(value)
+      .replace(
+        /&/g,
+        "&amp;"
+      )
+      .replace(
+        /</g,
+        "&lt;"
+      )
+      .replace(
+        />/g,
+        "&gt;"
+      )
+      .replace(
+        /"/g,
+        "&quot;"
+      )
+      .replace(
+        /'/g,
+        "&#039;"
+      );
 
   }
 
@@ -1102,7 +1834,9 @@ async function checkSession() {
 
   function showCheckout() {
 
-    if (cart.length === 0) {
+    if (
+      cart.length === 0
+    ) {
 
       alert(
         "Adiciona pelo menos um produto ao carrinho."
@@ -1114,11 +1848,15 @@ async function checkSession() {
 
 
     const checkout =
-      document.getElementById("checkout");
+      document.getElementById(
+        "checkout"
+      );
 
 
     if (!checkout) {
+
       return;
+
     }
 
 
@@ -1127,14 +1865,17 @@ async function checkSession() {
 
 
     checkout.scrollIntoView({
-      behavior: "smooth"
+
+      behavior:
+        "smooth"
+
     });
 
   }
 
 
   // ==========================================
-  // MENSAGEM
+  // MENSAGEM CHECKOUT
   // ==========================================
 
   function showCheckoutMessage(
@@ -1149,7 +1890,9 @@ async function checkSession() {
 
 
     if (!message) {
+
       return;
+
     }
 
 
@@ -1157,7 +1900,9 @@ async function checkSession() {
       "block";
 
 
-    if (type === "success") {
+    if (
+      type === "success"
+    ) {
 
       message.style.background =
         "#dcfce7";
@@ -1188,7 +1933,9 @@ async function checkSession() {
 
   async function createOrder() {
 
-    if (cart.length === 0) {
+    if (
+      cart.length === 0
+    ) {
 
       alert(
         "O carrinho está vazio."
@@ -1204,15 +1951,18 @@ async function checkSession() {
         "customerName"
       );
 
+
     const phoneInput =
       document.getElementById(
         "customerPhone"
       );
 
+
     const locationInput =
       document.getElementById(
         "customerLocation"
       );
+
 
     const orderButton =
       document.getElementById(
@@ -1223,8 +1973,10 @@ async function checkSession() {
     const name =
       nameInput.value.trim();
 
+
     const phone =
       phoneInput.value.trim();
+
 
     const location =
       locationInput.value.trim();
@@ -1262,104 +2014,243 @@ async function checkSession() {
       calculateTotal();
 
 
-    const order = {
-
-      buyer_name:
-        name,
-
-      buyer_phone:
-        phone,
-
-      buyer_location:
-        location,
-
-      total:
-        total,
-
-      status:
-        "pending"
-
-    };
-
-
     try {
 
       orderButton.disabled =
         true;
 
+
       orderButton.innerText =
         "⏳ A enviar...";
 
 
-      const {
-        data,
-        error
-      } =
-        await supabaseClient
-          .from("orders")
-          .insert([order])
+      /*
+       * ======================================
+       * 1. CRIAR O PEDIDO
+       * ======================================
+       */
+
+      const orderData =
+        {
+
+          buyer_name:
+            name,
+
+          buyer_phone:
+            phone,
+
+          buyer_location:
+            location,
+
+          total:
+            total,
+
+          status:
+            "pending"
+
+        };
 
 
-      if (error) {
+      /*
+       * Se houver utilizador autenticado,
+       * guardamos também o buyer_id.
+       */
 
-        console.error(
-          "ERRO SUPABASE:",
-          error
-        );
+      if (currentUser) {
 
-
-        showCheckoutMessage(
-          "Erro Supabase: " +
-          error.message,
-          "error"
-        );
-
-        return;
+        orderData.buyer_id =
+          currentUser.id;
 
       }
 
 
-      console.log(
-        "Encomenda criada:",
-        data
-      );
+      const {
 
+        data:
+          createdOrder,
+
+        error:
+          orderError
+
+      } =
+        await supabaseClient
+          .from("orders")
+          .insert([
+            orderData
+          ])
+          .select('"Id"')
+          .single();
+
+
+      if (orderError) {
+
+        throw new Error(
+          "Erro ao criar pedido: " +
+          orderError.message
+        );
+
+      }
+
+
+      if (
+        !createdOrder ||
+        !createdOrder.Id
+      ) {
+
+        throw new Error(
+          "O pedido foi criado, mas o ID não foi retornado."
+        );
+
+      }
+
+
+      const orderId =
+        createdOrder.Id;
+
+
+      /*
+       * ======================================
+       * 2. CRIAR ORDER_ITEMS
+       * ======================================
+       */
+
+      const orderItems =
+        cart.map(
+          function(item) {
+
+            return {
+
+              order_id:
+                orderId,
+
+              product_id:
+                item.product_id,
+
+              quantity:
+                Number(item.quantity),
+
+              price:
+                Number(item.price),
+
+              commission_rate:
+                5
+
+            };
+
+          }
+        );
+
+
+      const {
+        error:
+          itemsError
+      } =
+        await supabaseClient
+          .from("order_items")
+          .insert(
+            orderItems
+          );
+
+
+      if (itemsError) {
+
+        /*
+         * Tentamos apagar o pedido
+         * se os itens falharem.
+         */
+
+        await supabaseClient
+          .from("orders")
+          .delete()
+          .eq(
+            "Id",
+            orderId
+          );
+
+
+        throw new Error(
+          "Erro ao criar itens do pedido: " +
+          itemsError.message
+        );
+
+      }
+
+
+      /*
+       * ======================================
+       * 3. SUCESSO
+       * ======================================
+       */
 
       showCheckoutMessage(
-        "✅ Encomenda criada com sucesso!",
+
+        "✅ Encomenda #" +
+        orderId +
+        " criada com sucesso! " +
+        "Total: " +
+        formatKz(total),
+
         "success"
+
       );
 
 
+      /*
+       * Limpar carrinho
+       */
+
       cart = [];
+
 
       updateCart();
 
 
-      nameInput.value = "";
-      phoneInput.value = "";
-      locationInput.value = "";
+      /*
+       * Limpar formulário
+       */
+
+      nameInput.value =
+        "";
+
+      phoneInput.value =
+        "";
+
+      locationInput.value =
+        "";
+
+
+      /*
+       * Fechar checkout
+       */
+
+      document.getElementById(
+        "checkout"
+      ).style.display =
+        "none";
 
 
     } catch (error) {
 
       console.error(
-        "ERRO:",
+        "ERRO AO CRIAR ENCOMENDA:",
         error
       );
 
 
       showCheckoutMessage(
-        "Erro ao enviar encomenda: " +
-        error.message,
-        "error"
-      );
 
+        "❌ " +
+        error.message,
+
+        "error"
+
+      );
 
     } finally {
 
       orderButton.disabled =
         false;
+
 
       orderButton.innerText =
         "✅ Confirmar encomenda";
@@ -1380,10 +2271,12 @@ async function checkSession() {
         "searchInput"
       );
 
+
     const message =
       document.getElementById(
         "searchMessage"
       );
+
 
     const products =
       document.querySelectorAll(
@@ -1397,7 +2290,8 @@ async function checkSession() {
         .toLowerCase();
 
 
-    let found = 0;
+    let found =
+      0;
 
 
     products.forEach(
@@ -1429,12 +2323,16 @@ async function checkSession() {
     );
 
 
-    if (search === "") {
+    if (
+      search === ""
+    ) {
 
       message.innerText =
         "";
 
-    } else if (found === 0) {
+    } else if (
+      found === 0
+    ) {
 
       message.innerText =
         "Nenhum produto encontrado.";
@@ -1454,7 +2352,9 @@ async function checkSession() {
   // CATEGORIAS
   // ==========================================
 
-  function filterCategory(category) {
+  function filterCategory(
+    category
+  ) {
 
     const products =
       document.querySelectorAll(
@@ -1474,7 +2374,8 @@ async function checkSession() {
       );
 
 
-    let found = 0;
+    let found =
+      0;
 
 
     products.forEach(
@@ -1533,10 +2434,13 @@ async function checkSession() {
 
     if (message) {
 
-      if (category === "todos") {
+      if (
+        category === "todos"
+      ) {
 
         message.innerText =
-          "Todos os produtos";
+          found +
+          " produto(s) disponível(is).";
 
       } else {
 
@@ -1549,14 +2453,32 @@ async function checkSession() {
     }
 
 
-    document.getElementById(
-      "searchInput"
-    ).value = "";
+    const searchInput =
+      document.getElementById(
+        "searchInput"
+      );
 
 
-    document.getElementById(
-      "searchMessage"
-    ).innerText = "";
+    const searchMessage =
+      document.getElementById(
+        "searchMessage"
+      );
+
+
+    if (searchInput) {
+
+      searchInput.value =
+        "";
+
+    }
+
+
+    if (searchMessage) {
+
+      searchMessage.innerText =
+        "";
+
+    }
 
   }
 
@@ -1567,7 +2489,7 @@ async function checkSession() {
 
   document.addEventListener(
     "DOMContentLoaded",
-    function() {
+    async function() {
 
       const searchButton =
         document.getElementById(
@@ -1586,6 +2508,10 @@ async function checkSession() {
           ".category-button"
         );
 
+
+      /*
+       * Pesquisa
+       */
 
       if (searchButton) {
 
@@ -1617,6 +2543,10 @@ async function checkSession() {
       }
 
 
+      /*
+       * Categorias
+       */
+
       categoryButtons.forEach(
         function(button) {
 
@@ -1626,8 +2556,8 @@ async function checkSession() {
 
               filterCategory(
                 button.getAttribute(
-  "data-category"
-)
+                  "data-category"
+                )
               );
 
             }
@@ -1637,14 +2567,25 @@ async function checkSession() {
       );
 
 
-      // Mostrar todos os produtos ao abrir a página
-      filterCategory("todos");
+      /*
+       * Carrinho
+       */
 
-      // Atualizar o carrinho
       updateCart();
 
-      // Verificar conta/login
-checkSession();
+
+      /*
+       * Sessão
+       */
+
+      await checkSession();
+
+
+      /*
+       * Produtos do Supabase
+       */
+
+      await loadProducts();
 
     }
   );
@@ -1653,4 +2594,3 @@ checkSession();
 
 </body>
 </html>
-                 
