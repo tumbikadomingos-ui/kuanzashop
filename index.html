@@ -1118,277 +1118,178 @@
   }
 
 
-  // ==========================================
-  // PRODUTOS
-  // ==========================================
+  // // ==========================================
+// PRODUTOS
+// ==========================================
 
-  async function loadProducts() {
+async function loadProducts() {
 
-    const container =
-      document.getElementById(
-        "productsContainer"
-      );
+  const container =
+    document.getElementById("productsContainer");
 
+  const message =
+    document.getElementById("categoryMessage");
 
-    const message =
-      document.getElementById(
-        "categoryMessage"
-      );
-
-
-    if (!supabaseClient) {
-
-      message.innerText =
-        "Supabase não está disponível.";
-
-      return;
-
-    }
-
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .from("products")
-        .select(`
-          id,
-          product_id,
-          seller_id,
-          name,
-          description,
-          "Price",
-          stock,
-          category,
-          Image_ur1
-        `)
-        .order(
-          "created_at",
-          {
-            ascending: false
-          }
-        );
-
-
-    if (error) {
-
-      console.error(
-        "Erro ao carregar produtos:",
-        error
-      );
-
-
-      message.innerText =
-        "Erro ao carregar produtos: " +
-        error.message;
-
-      return;
-
-    }
-
-
-    container.innerHTML = "";
-
-
-    if (
-      !data ||
-      data.length === 0
-    ) {
-
-      message.innerText =
-        "Nenhum produto disponível.";
-
-      return;
-
-    }
-
-
-    data.forEach(
-      function(product) {
-
-        const article =
-          document.createElement(
-            "article"
-          );
-
-
-        article.className =
-          "product";
-
-
-        article.dataset.category =
-          normalizeCategory(
-            product.category
-          );
-
-
-        const image =
-          document.createElement(
-            "div"
-          );
-
-
-        image.className =
-          "product-image";
-
-
-        if (
-          product.Image_ur1
-        ) {
-
-          const img =
-            document.createElement(
-              "img"
-            );
-
-
-          img.src =
-            product.Image_ur1;
-
-          img.alt =
-            product.name;
-
-          img.onerror =
-            function() {
-
-              image.innerHTML =
-                "🛍️";
-
-            };
-
-
-          image.appendChild(img);
-
-        } else {
-
-          image.innerText =
-            getCategoryEmoji(
-              product.category
-            );
-
-        }
-
-
-        const title =
-          document.createElement(
-            "h3"
-          );
-
-
-        title.innerText =
-          product.name;
-
-
-        const description =
-          document.createElement(
-            "p"
-          );
-
-
-        description.innerText =
-          product.description ||
-          "Produto disponível no Kuanzashop.";
-
-
-        const price =
-          document.createElement(
-            "p"
-          );
-
-
-        price.className =
-          "price";
-
-
-        price.innerText =
-          formatKz(
-            product.Price
-          );
-
-
-        const button =
-          document.createElement(
-            "button"
-          );
-
-
-        button.type =
-          "button";
-
-        button.className =
-          "cart-button";
-
-
-        if (
-          Number(product.stock) <= 0
-        ) {
-
-          button.innerText =
-            "Sem stock";
-
-          button.disabled =
-            true;
-
-        } else {
-
-          button.innerText =
-            "Adicionar ao carrinho";
-
-
-          button.onclick =
-            function() {
-
-              addToCart(
-                product
-              );
-
-            };
-
-        }
-
-
-        article.appendChild(
-          image
-        );
-
-        article.appendChild(
-          title
-        );
-
-        article.appendChild(
-          description
-        );
-
-        article.appendChild(
-          price
-        );
-
-        article.appendChild(
-          button
-        );
-
-
-        container.appendChild(
-          article
-        );
-
-      }
-    );
-
+  if (!supabaseClient) {
 
     message.innerText =
-      data.length +
-      " produto(s) disponível(is).";
+      "Supabase não está disponível.";
 
-
-    filterCategory(
-      "todos"
-    );
-
+    return;
   }
 
+  console.log("A carregar produtos...");
 
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("products")
+      .select("*");
+
+  console.log("Produtos recebidos:", data);
+  console.log("Erro:", error);
+
+  if (error) {
+
+    console.error(
+      "Erro ao carregar produtos:",
+      error
+    );
+
+    message.innerText =
+      "Erro ao carregar produtos: " +
+      error.message;
+
+    return;
+  }
+
+  container.innerHTML = "";
+
+  if (!data || data.length === 0) {
+
+    message.innerText =
+      "Nenhum produto disponível.";
+
+    console.log(
+      "A tabela products está vazia."
+    );
+
+    return;
+  }
+
+  data.forEach(function(product) {
+
+    const article =
+      document.createElement("article");
+
+    article.className =
+      "product";
+
+    const image =
+      document.createElement("div");
+
+    image.className =
+      "product-image";
+
+    // Tenta encontrar a imagem
+    const imageUrl =
+      product.Image_url ||
+      product.Image_ur1 ||
+      product.image_url ||
+      product.image;
+
+    if (imageUrl) {
+
+      const img =
+        document.createElement("img");
+
+      img.src = imageUrl;
+
+      img.alt =
+        product.name || "Produto";
+
+      img.onerror =
+        function() {
+
+          image.innerHTML = "🛍️";
+
+        };
+
+      image.appendChild(img);
+
+    } else {
+
+      image.innerText = "🛍️";
+
+    }
+
+    const title =
+      document.createElement("h3");
+
+    title.innerText =
+      product.name || "Produto sem nome";
+
+    const description =
+      document.createElement("p");
+
+    description.innerText =
+      product.description ||
+      "Produto disponível no Kuanzashop.";
+
+    const price =
+      document.createElement("p");
+
+    price.className =
+      "price";
+
+    price.innerText =
+      formatKz(product.Price);
+
+    const button =
+      document.createElement("button");
+
+    button.type = "button";
+
+    button.className =
+      "cart-button";
+
+    if (Number(product.stock) <= 0) {
+
+      button.innerText =
+        "Sem stock";
+
+      button.disabled = true;
+
+    } else {
+
+      button.innerText =
+        "Adicionar ao carrinho";
+
+      button.onclick =
+        function() {
+
+          addToCart(product);
+
+        };
+    }
+
+    article.appendChild(image);
+    article.appendChild(title);
+    article.appendChild(description);
+    article.appendChild(price);
+    article.appendChild(button);
+
+    container.appendChild(article);
+
+  });
+
+  message.innerText =
+    data.length +
+    " produto(s) disponível(is).";
+
+    }
   // ==========================================
   // NORMALIZAR CATEGORIA
   // ==========================================
